@@ -38,7 +38,7 @@ export default function Mentors() {
 
         {/* Mentor 3 */}
         <div className="mentor-card mentor-orange">
-          <img src="/Santosh sir.png" alt="Mentor" className="mentor-img" />
+          <img src="/santosh sir.png" alt="Mentor" className="mentor-img" />
           <h5 className="mentor-name">Mr. Santosh Kamble</h5>
           <span className="mentor-role">Idea Lab Tech Guru</span>
           <p>
