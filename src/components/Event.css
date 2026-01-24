@@ -1,0 +1,164 @@
+/* =====================
+   HERO SECTION
+   ===================== */
+.event-hero {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #ffffff;
+  text-align: center;
+  padding: 90px 20px;
+}
+
+.event-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.event-hero h1 {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.event-hero p {
+  font-size: 17px;
+  color: #dbeafe;
+}
+
+/* =====================
+   EVENT GRID
+   ===================== */
+.event-container {
+  max-width: 1300px;
+  margin: 70px auto;
+  padding: 0 20px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+/* =====================
+   EVENT CARD
+   ===================== */
+.event-card {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+}
+
+.event-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.event-content {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.event-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 12px 0;
+}
+
+.event-content p {
+  font-size: 15px;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* INFO */
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+/* BADGES */
+.badge {
+  align-self: flex-start;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.upcoming {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.completed {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* BUTTON */
+.event-btn {
+  margin-top: auto;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.event-btn:hover {
+  background: #1d4ed8;
+}
+
+.event-btn.disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* =====================
+   COMPLETED CARD STYLE
+   ===================== */
+.event-card.completed {
+  opacity: 0.85;
+}
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+@media (max-width: 768px) {
+  .event-hero h1 {
+    font-size: 32px;
+  }
+
+  .event-hero p {
+    font-size: 15px;
+  }
+
+  .event-card img {
+    height: 180px;
+  }
+}

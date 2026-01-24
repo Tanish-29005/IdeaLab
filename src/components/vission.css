@@ -1,0 +1,178 @@
+/* HEADER */
+.vission-header {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.philosophy {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  letter-spacing: 1.2px;
+  margin-bottom: 6px;
+}
+
+.vission-text {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.line {
+  width: 90px;
+  height: 3px;
+  background-color: #2563eb;
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* SECTION LAYOUT */
+.vision-section {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 60px;
+  padding: 0 20px 80px;
+  flex-wrap: wrap;
+}
+
+/* CARD BASE */
+.vision-card {
+  width: 600px;
+  padding: 37px;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+}
+
+.vision-card h5 {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+}
+
+.vision-card p {
+  font-size: 22px;
+  line-height: 1.76;
+  color: #374151;
+}
+
+/* ICONS */
+.vission-icon,
+.mission-icon {
+  width: 52px;
+  height: 52px;
+}
+
+/* BACKGROUNDS */
+.vision-bg {
+  background-color: #f3f6ff;
+}
+
+.mission-bg {
+  background-color: #fff6ec;
+}
+
+/* HIGHLIGHTS */
+.vission-highlight {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.mission-highlight {
+  color: #f97316;
+  font-weight: 600;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .vission-text {
+    font-size: 34px;
+  }
+
+  .vision-card {
+    width: 520px;
+    padding: 32px;
+  }
+
+  .vision-card p {
+    font-size: 20px;
+  }
+
+  .vision-section {
+    gap: 32px;
+    margin-top: 50px;
+  }
+}
+@media (max-width: 768px) {
+  .vission-header {
+    margin-top: 60px;
+  }
+
+  .philosophy {
+    font-size: 11px;
+  }
+
+  .vission-text {
+    font-size: 28px;
+  }
+
+  .line {
+    width: 70px;
+  }
+
+  .vision-section {
+    margin-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .vision-card {
+    width: 100%;
+    max-width: 520px;
+    padding: 28px;
+  }
+
+  .vision-card h5 {
+    font-size: 22px;
+  }
+
+  .vision-card p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .vission-icon,
+  .mission-icon {
+    width: 46px;
+    height: 46px;
+  }
+}
+@media (max-width: 480px) {
+  .vission-text {
+    font-size: 24px;
+  }
+
+  .vision-card {
+    padding: 24px;
+  }
+
+  .vision-card h5 {
+    font-size: 20px;
+  }
+
+  .vision-card p {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .vission-icon,
+  .mission-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .line {
+    width: 60px;
+  }
+}

@@ -1,0 +1,95 @@
+/* =========================
+   SECTION
+   ========================= */
+.mentor-section {
+  padding: 80px 20px;
+  background: #f9fafb;
+  overflow: hidden;
+}
+
+.mentor-heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #111827;
+}
+
+/* =========================
+   CARD
+   ========================= */
+.mentor-card {
+  width: 420px;
+  margin: 0 24px; /* IMPORTANT for belt spacing */
+
+  background: #ffffff;
+  padding: 36px;
+  border-radius: 18px;
+  text-align: center;
+
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.mentor-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 18px;
+}
+
+.mentor-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mentor-role {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* =========================
+   ROLE COLORS
+   ========================= */
+.mentor-blue .mentor-img {
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45);
+}
+.mentor-blue .mentor-role {
+  color: #2563eb;
+}
+
+.mentor-green .mentor-img {
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.45);
+}
+.mentor-green .mentor-role {
+  color: #22c55e;
+}
+
+.mentor-orange .mentor-img {
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.45);
+}
+.mentor-orange .mentor-role {
+  color: #f97316;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+  .mentor-heading {
+    font-size: 28px;
+  }
+
+  .mentor-card {
+    width: 300px;
+    padding: 26px;
+  }
+
+  .mentor-img {
+    width: 96px;
+    height: 96px;
+  }
+}

@@ -1,0 +1,154 @@
+/* =========================
+   FOOTER BASE
+   ========================= */
+.footer {
+  background: #0f172a; /* dark navy */
+  color: #e5e7eb;
+  margin-top: 80px;
+}
+
+/* =========================
+   FOOTER CONTAINER
+   ========================= */
+.footer-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 64px 24px;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+}
+
+/* =========================
+   TEXT
+   ========================= */
+.footer-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.footer-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.footer-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #cbd5f5;
+  max-width: 420px;
+}
+
+/* =========================
+   LINKS
+   ========================= */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #cbd5f5;
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.footer-links li:hover {
+  color: #60a5fa;
+  transform: translateX(4px);
+}
+
+/* =========================
+   BOTTOM BAR
+   ========================= */
+.footer-bottom {
+  border-top: 1px solid #1e293b;
+  text-align: center;
+  padding: 18px 20px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* =========================
+   TABLET (<= 1024px)
+   ========================= */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-container .footer-col:first-child {
+    grid-column: span 2; /* About section full width */
+  }
+
+  .footer-text {
+    max-width: 100%;
+  }
+}
+
+/* =========================
+   MOBILE (<= 768px)
+   ========================= */
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 60px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .footer-title {
+    font-size: 20px;
+  }
+
+  .footer-heading {
+    font-size: 15px;
+  }
+
+  .footer-links li {
+    justify-content: center;
+    transform: none;
+  }
+
+  .footer-links li:hover {
+    transform: none;
+  }
+
+  .footer-text {
+    margin: 0 auto;
+  }
+}
+
+/* =========================
+   SMALL MOBILE (<= 480px)
+   ========================= */
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 40px 16px;
+    gap: 32px;
+  }
+
+  .footer-title {
+    font-size: 18px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+  }
+}
