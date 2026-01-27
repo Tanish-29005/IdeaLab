@@ -1,45 +1,46 @@
-/* 1. Main Wrapper: The Glass Effect */
+/* 1. Main Wrapper: Invisible Layout Container */
 .navbar-wrapper {
-  /* Sticky: Pushes content down but sticks on scroll */
+  /* Layout & Positioning */
   position: sticky;
-  top: 0;
+  top: 20px; /* Adds a gap from the top of the browser for a floating look */
   z-index: 1000;
   width: 100%;
-  padding: 20px 0;
-
-  /* Glassmorphism Background */
-  background: rgba(255, 255, 255, 0.75); /* 75% opacity white */
-  backdrop-filter: blur(16px);            /* Heavy blur for frosted look */
-  -webkit-backdrop-filter: blur(16px);    /* Safari support */
   
-  /* Border to define the bottom edge */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  /* Make the wrapper transparent so only the pill is visible */
+  background: transparent; 
+  box-shadow: none;
+  border: none;
+  padding: 0; /* Remove padding to let the pill float naturally */
 
   display: flex;
   justify-content: center;
-  
+  margin-bottom: 40px;
 }
 
-/* 2. Inner Container: Transparent & Clean */
+/* 2. Inner Container: THE GLASS PILL */
 .navbar-inner {
   width: 95%;
   max-width: 1350px;
 
-  /* Transparent bg so the wrapper's glass effect shows through */
-  background: transparent; 
+  /* GLASS EFFECT MOVED HERE */
+  background: rgba(255, 255, 255, 0.75); /* Semi-transparent white */
+  backdrop-filter: blur(16px);            /* heavy blur */
+  -webkit-backdrop-filter: blur(16px);    /* Safari support */
   
-  /* Optional: faint white border to define the 'pill' shape subtly */
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50px;
-  padding: 8px 30px;
+  /* Shape & Borders */
+  border-radius: 50px; /* The Curve */
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Glassy Edge */
+  
+  /* Shadow to make it pop off the page */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 
+  padding: 10px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* --- The rest stays exactly the same --- */
+/* --- Rest of the Content Styles (Unchanged) --- */
 
 /* Left Section */
 .nav-left {
@@ -48,11 +49,11 @@
   gap: 15px;
 }
 
-.nav-logo { height: 55px; width: auto; }
+.nav-logo { height: 35px; width: auto; }
 .nav-logo-idea { height: 45px; width: auto; }
 
 .nav-logo + .nav-logo-idea {
-  border-left: 1px solid #94a3b8; /* Slightly darker line for contrast on glass */
+  border-left: 1px solid #94a3b8; 
   padding-left: 15px;
 }
 
@@ -91,7 +92,7 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
-  color: #334155; /* Slightly darker for better readability on glass */
+  color: #334155; 
   position: relative;
   transition: color 0.2s ease;
 }
