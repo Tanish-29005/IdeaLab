@@ -6,7 +6,10 @@
   background: #f9fafb;
   overflow: hidden;
 }
-
+.mentor-section h4 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 .mentor-heading {
   text-align: center;
   font-size: 36px;

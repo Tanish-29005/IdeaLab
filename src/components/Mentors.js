@@ -6,8 +6,11 @@ const Marquee = MarqueeModule.default || MarqueeModule;
 export default function Mentors() {
   return (
     <section className="mentor-section">
-      <h2 className="mentor-heading">Our Mentors</h2>
+      <h1 className="mentor-heading">Our Mentors</h1>
+      
+       <h4>Dedicated faculty and experts guiding your innovation journey.
 
+</h4>
       <Marquee
         speed={45}
         pauseOnHover={true}
