@@ -1,10 +1,13 @@
 import "./Event.css";
 import Footer from "./Footer.js"
+import Navbar from "./Navbar.js";
 
 
 export default function Event() {
   return (
     <>
+      {/*Navbar */}
+      <Navbar />
       {/* HEADER */}
       <section className="event-hero">
         <span className="event-tag">WORKSHOPS & SEMINARS</span>

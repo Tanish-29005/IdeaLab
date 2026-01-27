@@ -26,12 +26,13 @@
    BIG MARQUEE TEXT
    ========================= */
 .marquee-item {
-  font-size: 38px;          /* Big & readable */
+  font-size: 48px;          /* Big & readable */
   font-weight: 700;
   margin: 0 60px;           /* wide spacing */
   letter-spacing: 2px;
   text-transform: uppercase;
   white-space: nowrap;
+
 }
 
 /* =========================

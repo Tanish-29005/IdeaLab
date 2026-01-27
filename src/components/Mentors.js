@@ -13,6 +13,7 @@ export default function Mentors() {
         pauseOnHover={true}
         pauseOnClick={true}
         gradient={false}
+        autoFill={true}
       >
         {/* Mentor 1 */}
         <div className="mentor-card mentor-blue">

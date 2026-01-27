@@ -6,6 +6,10 @@
   color: #ffffff;
   text-align: center;
   padding: 90px 20px;
+  border-radius: 30px;
+  width: 1640px;
+  margin-left: 30px;
+ 
 }
 
 .event-tag {
