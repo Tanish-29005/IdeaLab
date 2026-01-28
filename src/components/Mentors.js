@@ -1,16 +1,42 @@
+import { useEffect, useRef } from "react";
 import MarqueeModule from "react-fast-marquee";
 import "./Mentors.css";
 
 const Marquee = MarqueeModule.default || MarqueeModule;
 
 export default function Mentors() {
-  return (
-    <section className="mentor-section">
-      <h1 className="mentor-heading">Our Mentors</h1>
-      
-       <h4>Dedicated faculty and experts guiding your innovation journey.
+  const sectionRef = useRef(null);
 
-</h4>
+  // Scroll-progress reveal for whole section
+  useEffect(() => {
+    const animate = () => {
+      if (!sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      const progress = Math.min(
+        Math.max((vh - rect.top) / (vh * 0.85), 0),
+        1
+      );
+
+      sectionRef.current.style.opacity = progress;
+      sectionRef.current.style.transform = `translateY(${30 * (1 - progress)}px)`;
+    };
+
+    const raf = () => {
+      animate();
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="mentor-section scroll-mentor">
+      <h1 className="mentor-heading">Our Mentors</h1>
+      <h4>Dedicated faculty and experts guiding your innovation journey.</h4>
+
       <Marquee
         speed={45}
         pauseOnHover={true}
@@ -18,7 +44,6 @@ export default function Mentors() {
         gradient={false}
         autoFill={true}
       >
-        {/* Mentor 1 */}
         <div className="mentor-card mentor-blue">
           <img src="/Amisha mam.png" alt="Mentor" className="mentor-img" />
           <h5 className="mentor-name">Ms. Amisha Bhoir</h5>
@@ -29,7 +54,6 @@ export default function Mentors() {
           </p>
         </div>
 
-        {/* Mentor 2 */}
         <div className="mentor-card mentor-green">
           <img src="/Nirmol sir.png" alt="Mentor" className="mentor-img" />
           <h5 className="mentor-name">Mr. Nirmol Munvar</h5>
@@ -40,7 +64,6 @@ export default function Mentors() {
           </p>
         </div>
 
-        {/* Mentor 3 */}
         <div className="mentor-card mentor-orange">
           <img src="/santosh sir.png" alt="Mentor" className="mentor-img" />
           <h5 className="mentor-name">Mr. Santosh Kamble</h5>

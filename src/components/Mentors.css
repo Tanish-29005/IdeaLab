@@ -1,4 +1,13 @@
 /* =========================
+   SECTION REVEAL
+   ========================= */
+.scroll-mentor {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+}
+
+/* =========================
    SECTION
    ========================= */
 .mentor-section {
@@ -6,16 +15,19 @@
   background: #f9fafb;
   overflow: hidden;
 }
-.mentor-section h4 {
-  text-align: center;
-  margin-bottom: 30px;
-}
+
 .mentor-heading {
   text-align: center;
   font-size: 36px;
   font-weight: 700;
-  margin-bottom: 50px;
+  margin-bottom: 12px;
   color: #111827;
+}
+
+.mentor-section h4 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #6b7280;
 }
 
 /* =========================
@@ -23,7 +35,7 @@
    ========================= */
 .mentor-card {
   width: 420px;
-  margin: 0 24px; /* IMPORTANT for belt spacing */
+  margin: 0 24px;
 
   background: #ffffff;
   padding: 36px;
@@ -31,16 +43,36 @@
   text-align: center;
 
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
+/* Hover micro-interaction */
+.mentor-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
+}
+
+/* =========================
+   IMAGE
+   ========================= */
 .mentor-img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 18px;
+  transition: transform 0.3s ease;
 }
 
+.mentor-card:hover .mentor-img {
+  transform: scale(1.08);
+}
+
+/* =========================
+   TEXT
+   ========================= */
 .mentor-name {
   font-size: 20px;
   font-weight: 600;

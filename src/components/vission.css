@@ -1,4 +1,16 @@
-/* HEADER */
+/* =========================
+   INITIAL STATE
+   ========================= */
+.scroll-header,
+.scroll-left,
+.scroll-right {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* =========================
+   HEADER
+   ========================= */
 .vission-header {
   text-align: center;
   margin-top: 80px;
@@ -26,7 +38,9 @@
   margin: 0 auto;
 }
 
-/* SECTION LAYOUT */
+/* =========================
+   SECTION LAYOUT
+   ========================= */
 .vision-section {
   display: flex;
   justify-content: center;
@@ -36,13 +50,16 @@
   flex-wrap: wrap;
 }
 
-/* CARD BASE */
+/* =========================
+   CARD BASE
+   ========================= */
 .vision-card {
   width: 600px;
   padding: 37px;
   border-radius: 18px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   background: #ffffff;
+  transition: none; /* important */
 }
 
 .vision-card h5 {
@@ -84,8 +101,9 @@
   font-weight: 600;
 }
 
-/* RESPONSIVE */
-
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (max-width: 1024px) {
   .vission-text {
     font-size: 34px;
@@ -99,32 +117,11 @@
   .vision-card p {
     font-size: 20px;
   }
-
-  .vision-section {
-    gap: 32px;
-    margin-top: 50px;
-  }
 }
+
 @media (max-width: 768px) {
-  .vission-header {
-    margin-top: 60px;
-  }
-
-  .philosophy {
-    font-size: 11px;
-  }
-
   .vission-text {
     font-size: 28px;
-  }
-
-  .line {
-    width: 70px;
-  }
-
-  .vision-section {
-    margin-top: 40px;
-    padding-bottom: 60px;
   }
 
   .vision-card {
@@ -133,21 +130,11 @@
     padding: 28px;
   }
 
-  .vision-card h5 {
-    font-size: 22px;
-  }
-
   .vision-card p {
     font-size: 18px;
-    line-height: 1.7;
-  }
-
-  .vission-icon,
-  .mission-icon {
-    width: 46px;
-    height: 46px;
   }
 }
+
 @media (max-width: 480px) {
   .vission-text {
     font-size: 24px;
@@ -157,22 +144,7 @@
     padding: 24px;
   }
 
-  .vision-card h5 {
-    font-size: 20px;
-  }
-
   .vision-card p {
     font-size: 16px;
-    line-height: 1.65;
-  }
-
-  .vission-icon,
-  .mission-icon {
-    width: 42px;
-    height: 42px;
-  }
-
-  .line {
-    width: 60px;
   }
 }

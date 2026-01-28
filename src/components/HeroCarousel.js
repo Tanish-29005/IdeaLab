@@ -1,7 +1,6 @@
 import "./Landingpg.css";
 
 export default function HeroCarousel() {
-  // array of carousel images (from public)
   const slides = [
     {
       image: `${process.env.PUBLIC_URL}/idea.png`,
@@ -13,7 +12,6 @@ export default function HeroCarousel() {
       title: "Where Ideas Become Reality",
       desc: "A space for innovation, collaboration, prototyping, and entrepreneurship."
     }
-    
   ];
 
   return (
@@ -22,7 +20,7 @@ export default function HeroCarousel() {
         id="heroCarousel"
         className="carousel slide hero-carousel"
         data-bs-ride="carousel"
-        data-bs-interval="3000"
+        data-bs-interval="5000"
         data-bs-pause="false"
       >
         {/* Indicators */}

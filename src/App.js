@@ -7,16 +7,25 @@ import Signup from "./components/Signup.js";
 import Login from "./components/Login.js"
 import Event from "./components/Event.js";
 import Team from "./components/Team.js";
+import { ReactLenis, useLenis } from 'lenis/react'
 function App() {
+  const lenis = useLenis((lenis) => {
+    // called every scroll
+    console.log(lenis)
+  })
   return (
+  <ReactLenis root >
     <div className="App">
+      
        <Routes>
         <Route path="/" element={<Landingpg />} />
         <Route path="/event" element={<Event />} />
          <Route path="/team" element={<Team />} />
         
       </Routes>
+     
     </div>
+     </ReactLenis>
   );
 }
 
