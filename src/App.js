@@ -7,7 +7,9 @@ import Signup from "./components/Signup.js";
 import Login from "./components/Login.js"
 import Event from "./components/Event.js";
 import Team from "./components/Team.js";
+import Facilities from "./components/Facilities.js";
 import { ReactLenis, useLenis } from 'lenis/react'
+import Vission from "./components/Vission.js";
 function App() {
   const lenis = useLenis((lenis) => {
     // called every scroll
@@ -21,6 +23,8 @@ function App() {
         <Route path="/" element={<Landingpg />} />
         <Route path="/event" element={<Event />} />
          <Route path="/team" element={<Team />} />
+         <Route path="/facilities" element ={<Facilities />} /> 
+         <Route path="/vission" element ={<Vission />} /> 
         
       </Routes>
      

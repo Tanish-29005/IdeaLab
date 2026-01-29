@@ -1,4 +1,6 @@
 import "./Landingpg.css";
+import Facilities from "./Facilities.js";
+import { Link } from "react-router-dom";
 
 export default function HeroCarousel() {
   const slides = [
@@ -50,7 +52,7 @@ export default function HeroCarousel() {
                 <div className="carousel-caption-custom">
                   <h2>{slide.title}</h2>
                   <p>{slide.desc}</p>
-                  <button className="hero-btn">Explore IDEALab</button>
+                  <Link to="/facilities"><button className="hero-btn">Explore IDEALab</button></Link>
                 </div>
               </div>
             </div>

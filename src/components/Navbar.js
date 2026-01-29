@@ -19,7 +19,7 @@ export default function Navbar() {
         {/* Right Side: Navigation */}
         <nav className="nav-right">
           <NavLink to="/" end>Home</NavLink>
-          <NavLink to="/vision">Vision</NavLink> {/* Shortened for cleaner look */}
+          <NavLink to="/vission">Vision</NavLink> {/* Shortened for cleaner look */}
           <NavLink to="/event">Events</NavLink>
           <NavLink to="/facilities">Facilities</NavLink>
           <NavLink to="/team">Team</NavLink>
