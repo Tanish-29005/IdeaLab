@@ -1,227 +1,206 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import "./Event.css";
-import Footer from './Footer.js';
-import Navbar from './Navbar.js';
-import { 
-  Calendar, 
-  MapPin, 
-  Clock, 
-  ArrowRight, 
-  ChevronRight, 
-  Star,
-  CheckCircle2
-} from 'lucide-react';
+import Navbar from "./Navbar.js";
+import Footer from "./Footer.js";
+import { Calendar, MapPin, Clock, ChevronRight, CheckCircle2, Loader2, ChevronLeft } from "lucide-react";
 
-const UPCOMING_EVENTS = [
-  {
-    id: 1,
-    title: "Quantum Innovation Summit 2024",
-    date: "Oct 24, 2025",
-    time: "10:00 AM - 4:00 PM",
-    location: "Idealab",
-    description: "A flagship conference bringing together industry leaders and student researchers to discuss the future of quantum computing in logistics.",
-    category: "Summit",
-    image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?q=80&w=600&h=400&auto=format&fit=crop"
-  },
-  {
-    id: 2,
-    title: "Generative AI Workshop",
-    date: "Nov 02, 2025",
-    time: "02:00 PM - 05:00 PM",
-    location: "Idealab",
-    description: "Hands-on session on fine-tuning Large Language Models for specific institutional research datasets.",
-    category: "Workshop",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&h=400&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    title: "Global Sustainability Workshop",
-    date: "Dec 12, 2025",
-    time: "2:00pm - 3:00pm",
-    location: "Idealab",
-    description: "Build technical solutions for carbon footprint tracking in urban environments. $5,000 prize pool for winning prototypes.",
-    category: "Workshop",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&h=400&auto=format&fit=crop"
-  }
-];
-
-const PAST_EVENTS = [
-  {
-    id: "p1",
-    title: "Robo-Sprint 2023",
-    impact: "45 Prototypes Built",
-    description: "Our annual robotics competition saw a record turnout with projects ranging from medical assist bots to autonomous harvesters.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=400&h=300&auto=format&fit=crop"
-  },
-  {
-    id: "p2",
-    title: "IoT Expo: Connected Cities",
-    impact: "12 Industry Partnerships",
-    description: "Showcasing how low-latency sensors can revolutionize traffic management and waste collection.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400&h=300&auto=format&fit=crop"
-  },
-  {
-    id: "p3",
-    title: "Ethics in Tech Seminar",
-    impact: "50+ Attendees",
-    description: "A deep dive into the algorithmic biases and the importance of inclusive data sets in modern software.",
-    image: "https://images.unsplash.com/photo-1540575861501-7c001173a270?q=80&w=400&h=300&auto=format&fit=crop"
-  }
-];
+const SHEET_ID = "11r6awyQn69HkXY_jBCIqhCezwEySBra5shXcA1U283s";
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
 
 const EventCard = ({ event }) => (
   <div className="event-card">
     <div className="card-media">
-      <img src={event.image} alt={event.title} className="card-img" />
-      <div className="category-badge">
-        <span>{event.category}</span>
-      </div>
+      <img src={event.image} alt={event.title} />
+      <span className="category-badge">{event.category}</span>
     </div>
-    
     <div className="card-body">
-      <div className="card-header-info">
-        <div className="date-tag">
-          <Calendar size={14} />
-          {event.date}
-        </div>
-        <h3 className="card-title">{event.title}</h3>
+      <div className="date">
+        <Calendar size={14} />
+        {event.date}
       </div>
-      
-      <p className="card-desc">{event.description}</p>
-      
-      <div className="details-list">
-        <div className="detail-item">
-          <Clock size={14} /> {event.time}
+      <h3>{event.title}</h3>
+      <p>{event.description}</p>
+      <div className="meta">
+        <div className="meta-item">
+          <Clock size={14} />
+          <span>{event.time || "TBA"}</span>
         </div>
-        <div className="detail-item">
-          <MapPin size={14} /> {event.location}
+        <div className="meta-item">
+          <MapPin size={14} />
+          <span>{event.location || "TBA"}</span>
         </div>
       </div>
-      
-      <button className="register-btn">
-        Register Now <ChevronRight size={16} />
-      </button>
+      <a href={event.registrationLink} className="register-btn">
+        Register <ChevronRight size={16} />
+      </a>
     </div>
   </div>
 );
 
-export default function Event() {
+const PastEventCard = ({ event }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = event.images.filter(img => img);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
-    <>
-    <Navbar />
-    <div className="events-page">
-      <div className="background-glows">
-        <div className="glow glow-top"></div>
-        <div className="glow glow-bottom"></div>
-      </div>
-
-      <div className="events-content">
-        {/* Hero Section */}
-        <section className="hero-section">
-          <div className="hero-backdrop">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" alt="hero" />
-            <div className="hero-overlay"></div>
+    <div className="past-card">
+      <div className="past-card-content">
+        <div className="past-card-info">
+          <div className="impact">
+            <CheckCircle2 size={14} />
+            {event.impact || "Completed"}
           </div>
-          
-          <div className="hero-inner">
-            <div className="featured-badge">
-              <Star size={14} fill="currentColor" /> Featured Event
+          <h4>{event.title}</h4>
+          <div className="past-meta">
+            <div className="past-meta-item">
+              <Calendar size={14} />
+              <span>{event.date}</span>
             </div>
-            <h1 className="hero-title">
-              Innovate <span className="title-gradient">Beyond</span> Limits
-            </h1>
-            <p className="hero-subtitle">
-              Join the IdeaLab community for high-stakes hackathons, expert-led workshops, and the most anticipated tech summits of the year.
-            </p>
-            <div className="hero-actions">
-              
-              <button className="btn-secondary">
-                Our History
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* Upcoming Events Grid */}
-        <section className="upcoming-section">
-          <div className="section-top">
-            <div className="section-intro">
-              <span className="section-label">Schedule // 2024</span>
-              <h2 className="section-heading">
-                Upcoming <span className="muted">Engagements</span>
-              </h2>
-            </div>
-            <div className="node-stats">
-              <p className="stats-label">Active nodes</p>
-              <p className="stats-value">03 ACTIVE</p>
-            </div>
-          </div>
-
-          <div className="events-grid">
-            {UPCOMING_EVENTS.map(event => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-        </section>
-
-        {/* Legacy / Previous Events Section */}
-        <section className="legacy-section">
-          <div className="container">
-            <div className="legacy-grid">
-              <div className="legacy-info">
-                <div className="info-glow"></div>
-                <span className="section-label">Archive // Success Stories</span>
-                <h2 className="section-heading legacy-title">
-                  The <span className="title-gradient">Legacy</span> Section
-                </h2>
-                <p className="legacy-desc">
-                  IdeaLab isn't just about the future; it's about a consistent track record of innovation. Explore the projects and seminars that defined our last season.
-                </p>
-                <button className="archive-link">
-                  Explore Full Archive 
-                  <div className="circle-icon">
-                    <ArrowRight size={20} />
-                  </div>
-                </button>
+            {event.location && (
+              <div className="past-meta-item">
+                <MapPin size={14} />
+                <span>{event.location}</span>
               </div>
+            )}
+          </div>
+          <p>{event.description}</p>
+        </div>
 
-              <div className="legacy-list">
-                {PAST_EVENTS.map((past) => (
-                  <div key={past.id} className="past-event-item">
-                    <div className="past-img-box">
-                      <img src={past.image} alt={past.title} />
-                    </div>
-                    <div className="past-content">
-                      <div className="impact-tag">
-                        <CheckCircle2 size={12} /> {past.impact}
-                      </div>
-                      <h4 className="past-title">{past.title}</h4>
-                      <p className="past-desc">{past.description}</p>
-                    </div>
+        {images.length > 0 && (
+          <div className="carousel-wrapper">
+            <div className="carousel-container">
+              <img 
+                src={images[currentImageIndex]} 
+                alt={`${event.title} ${currentImageIndex + 1}`}
+                className="carousel-image"
+              />
+              {images.length > 1 && (
+                <>
+                  <button className="carousel-btn prev" onClick={prevImage}>
+                    <ChevronLeft size={20} />
+                  </button>
+                  <button className="carousel-btn next" onClick={nextImage}>
+                    <ChevronRight size={20} />
+                  </button>
+                  <div className="carousel-indicators">
+                    {images.map((_, idx) => (
+                      <button
+                        key={idx}
+                        className={`indicator ${idx === currentImageIndex ? 'active' : ''}`}
+                        onClick={() => setCurrentImageIndex(idx)}
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              )}
             </div>
           </div>
-        </section>
-
-        {/* Proposal CTA Section */}
-        <section className="proposal-section">
-          <div className="proposal-box">
-            <h3 className="proposal-title">
-              Have an <span className="accent">Event</span> Idea?
-            </h3>
-            <p className="proposal-desc">
-              Collaborate with the IdeaLab team to host your own workshop or hackathon. We provide the infrastructure and the audience.
-            </p>
-            <button className="proposal-btn">
-              Submit Proposal
-            </button>
-          </div>
-        </section>
+        )}
       </div>
     </div>
-    <Footer />
+  );
+};
+
+export default function Event() {
+  const [upcoming, setUpcoming] = useState([]);
+  const [past, setPast] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(SHEET_URL);
+        const text = await res.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        const rows = json?.table?.rows || [];
+
+        const data = rows.map((row, i) => ({
+          id: i,
+          title: row.c?.[0]?.v || "",
+          date: row.c?.[1]?.f || "",
+          time: row.c?.[2]?.v || "",
+          location: row.c?.[3]?.v || "",
+          description: row.c?.[4]?.v || "",
+          category: row.c?.[5]?.v || "Event",
+          image: row.c?.[6]?.v || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+          registrationLink: row.c?.[7]?.v || "#",
+          impact: row.c?.[8]?.v || "",
+          images: row.c?.[9]?.v ? row.c[9].v.split(",").map(i => i.trim()) : []
+        }));
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        setUpcoming(data.filter(e => new Date(e.date) >= today));
+        setPast(data.filter(e => new Date(e.date) < today));
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <>
+      <Navbar />
+      
+      <section className="events-section">
+        <div className="upcoming-header">
+          <div className="header-decoration">
+            <div className="decoration-circle circle-1"></div>
+            <div className="decoration-circle circle-2"></div>
+            <div className="decoration-circle circle-3"></div>
+          </div>
+          <h1 className="upcoming-title">Upcoming Events</h1>
+          <p className="upcoming-subtitle">Join us for exciting opportunities to learn, connect, and grow</p>
+          <div className="title-underline"></div>
+        </div>
+
+        {loading ? (
+          <div className="loader-container">
+            <Loader2 className="spinner" size={48} />
+          </div>
+        ) : upcoming.length === 0 ? (
+          <div className="empty-state">
+            <p>No upcoming events at the moment. Check back soon!</p>
+          </div>
+        ) : (
+          <div className="events-grid">
+            {upcoming.map(e => (
+              <EventCard key={e.id} event={e} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="past-section">
+        <div className="past-container">
+          <h2>Past Events</h2>
+          {past.length === 0 ? (
+            <div className="empty-state-dark">
+              <p>No past events to display.</p>
+            </div>
+          ) : (
+            <div className="past-list">
+              {past.map(e => (
+                <PastEventCard key={e.id} event={e} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <Footer />
     </>
   );
 }

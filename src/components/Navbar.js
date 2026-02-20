@@ -23,6 +23,7 @@ export default function Navbar() {
           <NavLink to="/event">Events</NavLink>
           <NavLink to="/facilities">Facilities</NavLink>
           <NavLink to="/team">Team</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
 
           <NavLink to="/contact" className="contact-btn">
             Contact Us
