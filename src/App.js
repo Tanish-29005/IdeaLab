@@ -11,6 +11,7 @@ import Facilities from "./components/Facilities.js";
 import { ReactLenis, useLenis } from 'lenis/react'
 import Vission from "./components/Vission.js";
 import Projects from "./components/Projects.js";
+import Contact from "./components/Contact.js";
 function App() {
   const lenis = useLenis((lenis) => {
     // called every scroll
@@ -27,6 +28,7 @@ function App() {
          <Route path="/facilities" element ={<Facilities />} /> 
          <Route path="/vission" element ={<Vission />} /> 
          <Route path="/projects" element ={<Projects />} /> 
+         <Route path="/contact" element ={<Contact />} /> 
         
       </Routes>
      

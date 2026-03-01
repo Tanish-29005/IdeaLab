@@ -44,33 +44,85 @@ export default function Mentors() {
         gradient={false}
         autoFill={true}
       >
-        <div className="mentor-card mentor-blue">
-          <img src="/Amisha mam.png" alt="Mentor" className="mentor-img" />
-          <h5 className="mentor-name">Ms. Amisha Bhoir</h5>
-          <span className="mentor-role">Faculty Co-ordinator</span>
+         <div className="mentor-card mentor-orange">
+          <img src="/Bhavesh sir.png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Dr. Bhavesh Patel</h5>
+          <span className="mentor-role">Chief Mentor</span>
           <p>
-            Driving the lab's vision and coordinating student activities and
-            workshops.
+            Security, Multimedia Retrieval
+          </p>
+        </div>
+        <div className="mentor-card mentor-blue">
+          <img src="/pramod sir 2.png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Dr. Pramod Bhavarthe</h5>
+          <span className="mentor-role">Co-Ordinator</span>
+          <p>
+            	Mirowave and Antenna Engg , Sensor Tech , PCB Design
           </p>
         </div>
 
         <div className="mentor-card mentor-green">
-          <img src="/Nirmol sir.png" alt="Mentor" className="mentor-img" />
-          <h5 className="mentor-name">Mr. Nirmol Munvar</h5>
+          <img src="/Namrata mam.png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Dr. Namrata Manglani</h5>
+          <span className="mentor-role">Co Co-Ordinator</span>
+          <p>
+            Theoretical Physics, Project Management, Institute Industry Interaction, Event Management .
+          </p>
+        </div>
+        <div className="mentor-card mentor-orange">
+          <img src="/Amisha mam (2).png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Ms. Amisha Bhoir</h5>
           <span className="mentor-role">Idea Lab Tech Guru</span>
           <p>
-            Expert in PCB design, electronics, and technical mentorship for
-            student projects.
+            Circuit Design, AI-ML,IoT,PCB Designing,Robotics and Drone, 3-D Printing, Laser Cutting
           </p>
         </div>
 
-        <div className="mentor-card mentor-orange">
-          <img src="/santosh sir.png" alt="Mentor" className="mentor-img" />
+        
+        <div className="mentor-card mentor-blue">
+          <img src="/Santosh sir (2).png" alt="Mentor" className="mentor-img" />
           <h5 className="mentor-name">Mr. Santosh Kamble</h5>
           <span className="mentor-role">Idea Lab Tech Guru</span>
           <p>
-            Specializing in mechanical prototyping, laser cutting, and workshop
-            safety.
+            Embedded Systems, IoT, Circuit Design, PLC, PCB .
+          </p>
+        </div>
+        <div className="mentor-card mentor-green">
+          <img src="/abhay sir.png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Mr. Abhay Nichte</h5>
+          <span className="mentor-role">Idea Lab Tech Guru</span>
+          <p>
+            Design Engineering .
+          </p>
+        </div>
+
+         <div className="mentor-card mentor-orange">
+          <img src="/Rishi sir.png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Dr. Rishi Kumar</h5>
+          <span className="mentor-role">Idea Lab Tech Guru</span>
+          <p>
+           Design Engineering .
+          </p>
+        </div>
+        <div className="mentor-card mentor-blue">
+          <img src="/Nirmol sir (2).png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Mr. Nirmol Munvar</h5>
+          <span className="mentor-role">Member</span>
+          <p>
+            Processor and Protocol Design and Verification, 3D Printing, PCB Design, App Developement .
+          </p>
+        </div>
+
+        
+        
+        
+    
+        <div className="mentor-card mentor-green">
+          <img src="/ganesh sir.png" alt="Mentor" className="mentor-img" />
+          <h5 className="mentor-name">Mr. Ganesh Nikam</h5>
+          <span className="mentor-role">Supporting Staff</span>
+          <p>
+            Web Development, Visual Studio, Linux .
           </p>
         </div>
       </Marquee>

@@ -1,4 +1,5 @@
 import "./Footer.css";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -19,11 +20,15 @@ export default function Footer() {
         <div className="footer-col">
           <h4 className="footer-heading">Quick Links</h4>
           <ul className="footer-links">
-            <li>Home</li>
-            <li>Vision & Mission</li>
-            <li>Facilities</li>
-            <li>Mentors</li>
-            <li>Contact</li>
+
+            <li><NavLink to="/" end>Home</NavLink></li>
+        
+          <li><NavLink to="/event">Events</NavLink></li>
+          <li><NavLink to="/facilities">Facilities</NavLink></li>
+          <li><NavLink to="/team">Team</NavLink></li>
+          <li><NavLink to="/projects">Projects</NavLink></li>
+
+          
           </ul>
         </div>
 

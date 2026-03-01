@@ -31,50 +31,51 @@
 }
 
 /* =========================
-   CARD
+   CARD (SYMMETRIC BUT NATURAL)
    ========================= */
 .mentor-card {
-  width: 420px;
+  width: 380px;
+  min-height: 360px;   /* equal minimum height */
   margin: 0 24px;
 
   background: #ffffff;
-  padding: 36px;
+  padding: 28px;
   border-radius: 18px;
+
   text-align: center;
 
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover micro-interaction */
+/* Hover */
 .mentor-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.14);
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
 /* =========================
    IMAGE
    ========================= */
 .mentor-img {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 18px;
+  object-position: center 20%;
+  margin-bottom: 16px;
   transition: transform 0.3s ease;
 }
 
 .mentor-card:hover .mentor-img {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
 /* =========================
    TEXT
    ========================= */
 .mentor-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 6px;
 }
@@ -82,29 +83,42 @@
 .mentor-role {
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   display: block;
+}
+
+/* Description directly under role */
+.mentor-card p {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.5;
+
+  /* limit to 3 lines for symmetry */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* =========================
    ROLE COLORS
    ========================= */
 .mentor-blue .mentor-img {
-  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
 }
 .mentor-blue .mentor-role {
   color: #2563eb;
 }
 
 .mentor-green .mentor-img {
-  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.45);
+  box-shadow: 0 8px 22px rgba(34, 197, 94, 0.4);
 }
 .mentor-green .mentor-role {
   color: #22c55e;
 }
 
 .mentor-orange .mentor-img {
-  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.45);
+  box-shadow: 0 8px 22px rgba(249, 115, 22, 0.4);
 }
 .mentor-orange .mentor-role {
   color: #f97316;
@@ -119,12 +133,13 @@
   }
 
   .mentor-card {
-    width: 300px;
-    padding: 26px;
+    width: 280px;
+    min-height: 320px;
+    padding: 22px;
   }
 
   .mentor-img {
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
   }
 }

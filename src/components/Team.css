@@ -1,15 +1,20 @@
+/* ==============================
+   PAGE
+================================= */
 .team-page {
-  background: #f8fafc;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
   min-height: 100vh;
 }
 
 .team-wrapper {
-  max-width: 1200px;
+  width: min(100%, 1300px);
   margin: 0 auto;
-  padding: 5rem 1.5rem;
+  padding: clamp(3rem, 5vw, 5rem) 1.5rem;
 }
 
-/* ---------- HEADER ---------- */
+/* ==============================
+   HEADER
+================================= */
 .team-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -17,130 +22,237 @@
 
 .team-badge {
   display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: #4f46e5;
+  padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
   color: #fff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   border-radius: 999px;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.18em;
   margin-bottom: 1rem;
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35);
 }
 
 .team-title {
-  font-size: 2.3rem;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
   font-weight: 900;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #0f172a;
 }
 
-/* ---------- TABS ---------- */
+/* ==============================
+   LEADERSHIP SECTION SPACING
+================================= */
+.leadership-section {
+  margin-bottom: clamp(4rem, 6vw, 6rem);
+}
+
+/* ==============================
+   TABS (Premium Look)
+================================= */
 .team-tabs {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 3rem;
+  gap: 0.9rem;
+  margin-bottom: 3.5rem;
   flex-wrap: wrap;
 }
 
 .team-tab {
-  padding: 0.6rem 1.4rem;
+  padding: 0.75rem 1.8rem;
   border-radius: 999px;
-  border: none;
-  background: #e5e7eb;
-  font-size: 11px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.04em;
+}
+
+.team-tab:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
 }
 
 .team-tab.active {
-  background: #4f46e5;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
   color: #fff;
+  border-color: transparent;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
 }
 
-/* ---------- GRIDS ---------- */
+/* ==============================
+   GRIDS
+================================= */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1.8rem, 2vw, 3rem);
+  justify-items: center;
 }
 
 .leadership-grid.single {
   display: flex;
   justify-content: center;
+  gap: 2rem;
 }
 
-/* ---------- CARD ---------- */
+/* ==============================
+   CARD (Wider + Premium)
+================================= */
 .team-card {
   background: #fff;
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-  width: 280px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
 }
 
-/* ---------- IMAGE ---------- */
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+}
+
+/* ==============================
+   IMAGE
+================================= */
 .team-card-image {
   width: 100%;
-  aspect-ratio: 1 / 1; /* compact */
-  background: #020617;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  overflow: hidden;
 }
 
 .team-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  transition: transform 0.45s ease;
 }
 
-/* ---------- BODY ---------- */
+.team-card:hover .team-card-image img {
+  transform: scale(1.06);
+}
+
+/* ==============================
+   BODY
+================================= */
 .team-card-body {
-  padding: 1rem 1.25rem;
+  padding: 1.4rem 1.6rem;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .team-name {
-  font-size: 1.15rem;
-  font-weight: 900;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
 }
 
 .team-role {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #4f46e5;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
+  letter-spacing: 0.08em;
 }
 
 .team-bio {
-  font-size: 11px;
+  font-size: 0.9rem;
   color: #64748b;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ---------- COMPACT ADMIN CARD ---------- */
+/* Compact (Admin) */
 .team-card.compact .team-bio {
   display: none;
 }
 
-/* ---------- SOCIAL ---------- */
+/* ==============================
+   SOCIAL
+================================= */
 .team-socials {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: 1rem;
+  margin-top: 0.8rem;
 }
 
 .team-socials a {
-  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #475569;
+  transition: all 0.3s ease;
 }
 
 .team-socials a:hover {
-  color: #4f46e5;
+  background: #4f46e5;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* ==============================
+   RESPONSIVE
+================================= */
+@media (max-width: 768px) {
+  .team-wrapper {
+    padding: 3rem 1.25rem;
+  }
+
+  .team-grid {
+    gap: 2rem;
+  }
+
+  .team-card {
+    max-width: 100%;
+  }
+
+  .team-tabs {
+    gap: 0.6rem;
+  }
+
+  .team-tab {
+    padding: 0.6rem 1.2rem;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-title {
+    font-size: 1.6rem;
+  }
+
+  .team-name {
+    font-size: 1.05rem;
+  }
+
+  .team-bio {
+    font-size: 0.85rem;
+  }
+}
+
+/* Disable hover bounce on touch devices */
+@media (hover: none) {
+  .team-card:hover {
+    transform: none;
+  }
 }

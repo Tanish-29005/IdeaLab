@@ -1,132 +1,156 @@
 import { useEffect, useRef, useState } from "react";
 import "./Projects.css";
 import Navbar from "./Navbar.js";
+import Footer from "./Footer.js";
 
-const projects = [
-  {
-    title: "Autonomous Surveillance Drone",
-    mentor: "prof.Amisha Bhoir",
-    team: "Swatantra Systems",
-    problem:
-      "Designed for real-time aerial monitoring and threat detection using onboard AI.",
-    components: [
-      "3d Printer",
-      "Lab Space",
-      
-    ],
-    outcome: "Demonstrated to industry mentors",
-    image: "/Drone.jpeg",
-    thumb: "/Drone.jpeg"
-  },
-  {
-    title: "Smart Waste Segregation",
-    mentor: "Prof. R. Mehta",
-    team: "EcoTech",
-    problem:
-      "Automated waste segregation using sensors to improve recycling efficiency.",
-    components: [
-      "Electronics Lab",
-      "Sensor Kits",
-      "Rapid Prototyping Tools"
-    ],
-    outcome: "Winner – State Level Hackathon",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
-    thumb: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
-  },
-  {
-    title: "IoT Energy Monitoring",
-    mentor: "Dr. P. Kulkarni",
-    team: "VoltVision",
-    problem:
-      "Real-time energy monitoring system to reduce power wastage in labs.",
-    components: [
-      "IoT Development Lab",
-      "Energy Meters",
-      "Cloud Compute Facility"
-    ],
-    outcome: "Used inside IdeaLab",
-    image: "/iot.png",
-    thumb: "/iot.png"
-  }
-];
+const SHEET_ID = "18ITb2H7qWE7YsvnIXqeJ05q4iY47JhtK4_Ehz9micP4";
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
 
-export default function ProjectsHeroSlider() {
+export default function Projects() {
   const sliderRef = useRef(null);
   const [active, setActive] = useState(0);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // 🔹 Fetch Data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(SHEET_URL);
+        const text = await res.text();
+
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        const rows = json?.table?.rows || [];
+
+        const sheetData = rows
+          .slice(1)
+          .filter(row => row.c && row.c.some(cell => cell?.v))
+          .map((row, i) => {
+            const get = (index) =>
+              row.c?.[index]?.v?.toString().trim() || "";
+
+            return {
+              id: i,
+              title: get(0),
+              mentor: get(1),
+              team: get(2),
+              problem: get(3),
+              components: get(4)
+                ? get(4).split(",").map(c => c.trim())
+                : [],
+              outcome: get(5),
+              image: get(6),
+              thumb: get(7)
+            };
+          })
+          .filter(p => p.title && p.problem && p.image);
+
+        setProjects(sheetData);
+        setActive(0);
+        setLoading(false);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // 🔹 Scroll Tracking
   useEffect(() => {
     const slider = sliderRef.current;
+    if (!slider) return;
 
-    const onScroll = () => {
-      const index = Math.round(slider.scrollLeft / window.innerWidth);
+    const handleScroll = () => {
+      const slideWidth = slider.offsetWidth;
+      const index = Math.round(slider.scrollLeft / slideWidth);
       setActive(index);
     };
 
-    slider.addEventListener("scroll", onScroll);
-    return () => slider.removeEventListener("scroll", onScroll);
-  }, []);
+    slider.addEventListener("scroll", handleScroll);
+    return () => slider.removeEventListener("scroll", handleScroll);
+  }, [projects]);
 
   const scrollTo = (index) => {
-    sliderRef.current.scrollTo({
-      left: index * window.innerWidth,
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const slideWidth = slider.offsetWidth;
+
+    slider.scrollTo({
+      left: index * slideWidth,
       behavior: "smooth"
     });
   };
 
   return (
     <>
-    <Navbar />
-    
-    <section className="ps-hero">
-      <div className="ps-slides" ref={sliderRef}>
-        {projects.map((p, i) => (
-          <div
-            key={i}
-            className="ps-slide"
-            style={{ backgroundImage: `url(${p.image})` }}
-          >
-            <div className="ps-overlay" />
+      <Navbar />
 
-            <div className="ps-content">
-              <span className="ps-label">IDEALAB PROJECT</span>
+      <section className="ps-hero">
+        {loading ? (
+          <div className="ps-loading">Loading Projects...</div>
+        ) : projects.length === 0 ? (
+          <div className="ps-loading">No Valid Projects Found</div>
+        ) : (
+          <>
+            <div className="ps-slides" ref={sliderRef}>
+              {projects.map((p) => (
+                <div
+                  key={p.id}
+                  className="ps-slide"
+                  style={{ backgroundImage: `url(${p.image})` }}
+                >
+                  <div className="ps-overlay" />
 
-              <h1 className="ps-title">{p.title}</h1>
+                  <div className="ps-content">
+                    <span className="ps-label">IDEALAB PROJECT</span>
 
-              <p className="ps-problem">{p.problem}</p>
+                    <h1 className="ps-title">{p.title}</h1>
 
-              <div className="ps-meta">
-                <span><strong>Mentor:</strong> {p.mentor}</span>
-                <span><strong>Team:</strong> {p.team}</span>
-              </div>
+                    <p className="ps-problem">{p.problem}</p>
 
-              {/* Components / Facilities */}
-              <div className="ps-components">
-                {p.components.map((c, idx) => (
-                  <span key={idx} className="ps-chip">{c}</span>
-                ))}
-              </div>
+                    <div className="ps-meta">
+                      <span><strong>Mentor:</strong> {p.mentor}</span>
+                      <span><strong>Team:</strong> {p.team}</span>
+                    </div>
 
-              <p className="ps-outcome">
-                <strong>Outcome:</strong> {p.outcome}
-              </p>
+                    {p.components.length > 0 && (
+                      <div className="ps-components">
+                        {p.components.map((c, idx) => (
+                          <span key={idx} className="ps-chip">
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {p.outcome && (
+                      <p className="ps-outcome">
+                        <strong>Outcome:</strong> {p.outcome}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
-      </div>
 
-      {/* Thumbnails */}
-      <div className="ps-thumbs">
-        {projects.map((p, i) => (
-          <div
-            key={i}
-            className={`ps-thumb ${active === i ? "active" : ""}`}
-            onClick={() => scrollTo(i)}
-          >
-            <img src={p.thumb} alt={p.title} />
-          </div>
-        ))}
-      </div>
-    </section>
+            <div className="ps-thumbs">
+              {projects.map((p, i) => (
+                <div
+                  key={p.id}
+                  className={`ps-thumb ${active === i ? "active" : ""}`}
+                  onClick={() => scrollTo(i)}
+                >
+                  <img src={p.thumb || p.image} alt={p.title} />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+      <Footer />
     </>
   );
 }
