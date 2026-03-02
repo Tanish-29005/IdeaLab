@@ -15,17 +15,37 @@ import {
 const SHEET_ID = "11r6awyQn69HkXY_jBCIqhCezwEySBra5shXcA1U283s";
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
 
+const convertDriveLink = (url) => {
+  if (!url) return "";
+
+  if (url.includes("drive.google.com")) {
+    const fileMatch = url.match(/\/file\/d\/(.*?)\//);
+    if (fileMatch && fileMatch[1]) {
+      return `https://drive.google.com/uc?export=view&id=${fileMatch[1]}`;
+    }
+
+    const idMatch = url.match(/[?&]id=([^&]+)/);
+    if (idMatch && idMatch[1]) {
+      return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+    }
+  }
+
+  return url;
+};
+
 const EventCard = ({ event }) => (
   <div className="event-card">
     <div className="card-media">
       <img src={event.image} alt={event.title} />
       <span className="category-badge">{event.category}</span>
     </div>
+
     <div className="card-body">
       <div className="date">
         <Calendar size={14} />
         {event.date}
       </div>
+
       <h3>{event.title}</h3>
       <p>{event.description}</p>
 
@@ -34,6 +54,7 @@ const EventCard = ({ event }) => (
           <Clock size={14} />
           <span>{event.time || "TBA"}</span>
         </div>
+
         <div className="meta-item">
           <MapPin size={14} />
           <span>{event.location || "TBA"}</span>
@@ -49,7 +70,7 @@ const EventCard = ({ event }) => (
 
 const PastEventCard = ({ event }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = event.images.filter(img => img);
+  const images = event.images.filter(Boolean);
 
   const nextImage = () => {
     setCurrentImageIndex(prev => (prev + 1) % images.length);
@@ -161,13 +182,16 @@ export default function Event() {
           location: row.c?.[3]?.v || "",
           description: row.c?.[4]?.v || "",
           category: row.c?.[5]?.v || "Event",
-          image:
+          image: convertDriveLink(
             row.c?.[6]?.v ||
-            "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+              "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"
+          ),
           registrationLink: row.c?.[7]?.v || "#",
           impact: row.c?.[8]?.v || "",
           images: row.c?.[9]?.v
-            ? row.c[9].v.split(",").map(i => i.trim())
+            ? row.c[9].v
+                .split(",")
+                .map(i => convertDriveLink(i.trim()))
             : []
         }));
 
