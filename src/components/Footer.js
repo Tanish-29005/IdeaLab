@@ -39,7 +39,7 @@ export default function Footer() {
           </p>
           <p className="footer-text">
             Email: idealab@sakec.ac.in<br />
-            Phone: +91 98765 43210
+      
           </p>
         </div>
 

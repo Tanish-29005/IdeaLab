@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Event.css";
 import Navbar from "./Navbar.js";
 import Footer from "./Footer.js";
-import { Calendar, MapPin, Clock, ChevronRight, CheckCircle2, Loader2, ChevronLeft } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Clock,
+  ChevronRight,
+  CheckCircle2,
+  Loader2,
+  ChevronLeft
+} from "lucide-react";
 
 const SHEET_ID = "11r6awyQn69HkXY_jBCIqhCezwEySBra5shXcA1U283s";
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
@@ -20,6 +28,7 @@ const EventCard = ({ event }) => (
       </div>
       <h3>{event.title}</h3>
       <p>{event.description}</p>
+
       <div className="meta">
         <div className="meta-item">
           <Clock size={14} />
@@ -30,6 +39,7 @@ const EventCard = ({ event }) => (
           <span>{event.location || "TBA"}</span>
         </div>
       </div>
+
       <a href={event.registrationLink} className="register-btn">
         Register <ChevronRight size={16} />
       </a>
@@ -42,11 +52,11 @@ const PastEventCard = ({ event }) => {
   const images = event.images.filter(img => img);
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setCurrentImageIndex(prev => (prev + 1) % images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex(prev => (prev - 1 + images.length) % images.length);
   };
 
   return (
@@ -57,12 +67,15 @@ const PastEventCard = ({ event }) => {
             <CheckCircle2 size={14} />
             {event.impact || "Completed"}
           </div>
+
           <h4>{event.title}</h4>
+
           <div className="past-meta">
             <div className="past-meta-item">
               <Calendar size={14} />
               <span>{event.date}</span>
             </div>
+
             {event.location && (
               <div className="past-meta-item">
                 <MapPin size={14} />
@@ -70,37 +83,41 @@ const PastEventCard = ({ event }) => {
               </div>
             )}
           </div>
+
           <p>{event.description}</p>
         </div>
 
         {images.length > 0 && (
-          <div className="carousel-wrapper">
-            <div className="carousel-container">
-              <img 
-                src={images[currentImageIndex]} 
-                alt={`${event.title} ${currentImageIndex + 1}`}
-                className="carousel-image"
-              />
-              {images.length > 1 && (
-                <>
-                  <button className="carousel-btn prev" onClick={prevImage}>
-                    <ChevronLeft size={20} />
-                  </button>
-                  <button className="carousel-btn next" onClick={nextImage}>
-                    <ChevronRight size={20} />
-                  </button>
-                  <div className="carousel-indicators">
-                    {images.map((_, idx) => (
-                      <button
-                        key={idx}
-                        className={`indicator ${idx === currentImageIndex ? 'active' : ''}`}
-                        onClick={() => setCurrentImageIndex(idx)}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
+          <div className="carousel-container">
+            <img
+              src={images[currentImageIndex]}
+              alt=""
+              className="carousel-image"
+            />
+
+            {images.length > 1 && (
+              <>
+                <button className="carousel-btn prev" onClick={prevImage}>
+                  <ChevronLeft size={20} />
+                </button>
+
+                <button className="carousel-btn next" onClick={nextImage}>
+                  <ChevronRight size={20} />
+                </button>
+
+                <div className="carousel-indicators">
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      className={`indicator ${
+                        idx === currentImageIndex ? "active" : ""
+                      }`}
+                      onClick={() => setCurrentImageIndex(idx)}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
@@ -112,6 +129,21 @@ export default function Event() {
   const [upcoming, setUpcoming] = useState([]);
   const [past, setPast] = useState([]);
   const [loading, setLoading] = useState(true);
+  const sliderRef = useRef(null);
+
+  const scrollLeft = () => {
+    sliderRef.current.scrollBy({
+      left: -sliderRef.current.offsetWidth,
+      behavior: "smooth"
+    });
+  };
+
+  const scrollRight = () => {
+    sliderRef.current.scrollBy({
+      left: sliderRef.current.offsetWidth,
+      behavior: "smooth"
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,10 +161,14 @@ export default function Event() {
           location: row.c?.[3]?.v || "",
           description: row.c?.[4]?.v || "",
           category: row.c?.[5]?.v || "Event",
-          image: row.c?.[6]?.v || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+          image:
+            row.c?.[6]?.v ||
+            "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
           registrationLink: row.c?.[7]?.v || "#",
           impact: row.c?.[8]?.v || "",
-          images: row.c?.[9]?.v ? row.c[9].v.split(",").map(i => i.trim()) : []
+          images: row.c?.[9]?.v
+            ? row.c[9].v.split(",").map(i => i.trim())
+            : []
         }));
 
         const today = new Date();
@@ -153,7 +189,7 @@ export default function Event() {
   return (
     <>
       <Navbar />
-      
+
       <section className="events-section">
         <div className="upcoming-header">
           <div className="header-decoration">
@@ -161,8 +197,11 @@ export default function Event() {
             <div className="decoration-circle circle-2"></div>
             <div className="decoration-circle circle-3"></div>
           </div>
+
           <h1 className="upcoming-title">Upcoming Events</h1>
-          <p className="upcoming-subtitle">Join us for exciting opportunities to learn, connect, and grow</p>
+          <p className="upcoming-subtitle">
+            Join us for exciting opportunities to learn, connect, and grow
+          </p>
           <div className="title-underline"></div>
         </div>
 
@@ -172,7 +211,7 @@ export default function Event() {
           </div>
         ) : upcoming.length === 0 ? (
           <div className="empty-state">
-            <p>No upcoming events at the moment. Check back soon!</p>
+            <p>No upcoming events at the moment.</p>
           </div>
         ) : (
           <div className="events-grid">
@@ -186,15 +225,28 @@ export default function Event() {
       <section className="past-section">
         <div className="past-container">
           <h2>Past Events</h2>
+
           {past.length === 0 ? (
             <div className="empty-state-dark">
               <p>No past events to display.</p>
             </div>
           ) : (
-            <div className="past-list">
-              {past.map(e => (
-                <PastEventCard key={e.id} event={e} />
-              ))}
+            <div className="past-slider-wrapper">
+              <button className="slider-arrow left" onClick={scrollLeft}>
+                <ChevronLeft size={20} />
+              </button>
+
+              <div className="past-slider" ref={sliderRef}>
+                {past.map(e => (
+                  <div className="past-slide" key={e.id}>
+                    <PastEventCard event={e} />
+                  </div>
+                ))}
+              </div>
+
+              <button className="slider-arrow right" onClick={scrollRight}>
+                <ChevronRight size={20} />
+              </button>
             </div>
           )}
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Linkedin, Github, Twitter, ShieldCheck } from "lucide-react";
 import "./Team.css";
 import Navbar from "./Navbar.js";
+import Mentors from "./Mentors.js";
 import Footer from "./Footer.js";
 
 const SHEET_ID = "1rq3F5zwBw7Aw6yrAv9qPr0ALzOGuJ4p-4h-q9Z_VPXA";
@@ -81,7 +82,7 @@ export default function Team() {
   return (
     <>
       <Navbar />
-
+      <Mentors />
       <div className="team-page">
         <div className="team-wrapper">
 

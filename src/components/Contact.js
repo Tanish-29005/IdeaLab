@@ -82,35 +82,10 @@ export default function Contact() {
             </button>
           </div>
 
-          <div
-            className="contact-card card-phone"
-            onClick={() =>
-              handleCopy("022-25580854 / 09136400555", "phone")
-            }
-          >
-            <div className="card-icon-wrapper">
-              <Phone size={22} />
-            </div>
+          
 
-            <div>
-              <div className="card-label">Call Us</div>
-              <div className="card-value">
-                022-25580854 / 09136400555
-              </div>
-            </div>
-
-            <button className="card-action">
-              {copiedItem === "phone" ? (
-                <>
-                  <CheckCircle2 size={18} /> Copied
-                </>
-              ) : (
-                <>
-                  <Copy size={18} /> Copy Number
-                </>
-              )}
-            </button>
-          </div>
+           
+          
 
           <div className="contact-card card-location">
             <div className="card-icon-wrapper">
@@ -167,7 +142,7 @@ export default function Contact() {
                 className="social-link"
               >
                 <div className="social-link-left">
-                  🌐 <span>www.shahandanchor.com</span>
+                  🌐 <span>www.sakec.ac.in</span>
                 </div>
                 <ArrowUpRight size={18} />
               </a>
@@ -184,7 +159,7 @@ export default function Contact() {
           </div>
 
         </div>
-      </div>
+    </div>
       <Footer />
     </>
   );

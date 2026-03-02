@@ -1,5 +1,5 @@
 .marquee-wrapper {
-  padding: 30px 0;
+  padding: 40px 0;
   overflow: hidden;
   background: linear-gradient(
     90deg,
@@ -12,14 +12,23 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
+/* TEXT ITEMS */
+
 .marquee-item {
-  font-size: 48px;
+  font-size: clamp(26px, 4vw, 48px);
   font-weight: 700;
-  margin: 0 60px;
+  margin: 0 clamp(30px, 5vw, 60px);
   letter-spacing: 2px;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: transform 0.3s ease;
 }
+
+.marquee-item:hover {
+  transform: scale(1.08);
+}
+
+/* COLORS */
 
 .iot {
   color: #2563eb;
@@ -37,9 +46,37 @@
   color: #7c3aed;
 }
 
+/* ---------- LARGE TABLETS ---------- */
+
+@media (max-width: 1024px) {
+  .marquee-wrapper {
+    padding: 32px 0;
+  }
+}
+
+/* ---------- TABLETS ---------- */
+
 @media (max-width: 768px) {
+  .marquee-wrapper {
+    padding: 26px 0;
+  }
+
   .marquee-item {
-    font-size: 26px;
-    margin: 0 40px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* ---------- SMALL PHONES ---------- */
+
+@media (max-width: 480px) {
+
+  .marquee-wrapper {
+    padding: 20px 0;
+  }
+
+  .marquee-item {
+    font-size: 22px;
+    margin: 0 24px;
+    letter-spacing: 1px;
   }
 }

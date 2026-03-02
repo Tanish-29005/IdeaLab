@@ -17,7 +17,6 @@ export default function Landingpg() {
       <MarqueeComponent />
       <Vission />
       <Uevents />
-      <Mentors />
       <Footer />
     </>
   );

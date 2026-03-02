@@ -3,10 +3,6 @@
   top: 20px;
   z-index: 1000;
   width: 100%;
-  background: transparent;
-  box-shadow: none;
-  border: none;
-  padding: 0;
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
@@ -17,42 +13,47 @@
   max-width: 1350px;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border-radius: 50px;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
   padding: 10px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
+
+/* LEFT SECTION */
 
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
 }
 
 .nav-logo {
   height: 55px;
-  width: auto;
+  display: block;
 }
 
 .nav-logo-idea {
   height: 45px;
-  width: auto;
+  display: block;
 }
 
 .nav-logo + .nav-logo-idea {
   border-left: 1px solid #94a3b8;
-  padding-left: 15px;
+  padding-left: 18px;
 }
+
+/* FIXED TEXT ALIGNMENT */
 
 .nav-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 5px;
+  margin-top: 3%;
+  line-height: 1.2;
 }
 
 .nav-text h1 {
@@ -60,17 +61,20 @@
   font-weight: 700;
   color: #0f172a;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .nav-text p {
-  margin: 0;
+  margin-top: 2px;
   font-size: 10px;
   font-weight: 600;
   color: #475569;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  line-height: 1.2;
 }
+
+/* RIGHT SECTION */
 
 .nav-right {
   display: flex;
@@ -84,7 +88,7 @@
   font-weight: 500;
   color: #334155;
   position: relative;
-  transition: color 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .nav-right a:hover {
@@ -115,7 +119,7 @@
   padding: 10px 24px;
   border-radius: 30px;
   box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
-  transition: all 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .contact-btn:hover {
@@ -123,12 +127,65 @@
   transform: translateY(-1px);
 }
 
+/* HAMBURGER */
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* TABLET & MOBILE */
+
 @media (max-width: 1024px) {
+
   .nav-text p {
     display: none;
   }
 
-  .nav-right {
+  .desktop-menu {
     display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .mobile-menu .contact-btn {
+    text-align: center;
   }
 }

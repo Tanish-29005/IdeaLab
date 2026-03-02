@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./Projects.css";
 import Navbar from "./Navbar.js";
-import Footer from "./Footer.js";
 
 const SHEET_ID = "18ITb2H7qWE7YsvnIXqeJ05q4iY47JhtK4_Ehz9micP4";
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
@@ -12,13 +11,11 @@ export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(SHEET_URL);
         const text = await res.text();
-
         const json = JSON.parse(text.substring(47, text.length - 2));
         const rows = json?.table?.rows || [];
 
@@ -56,7 +53,6 @@ export default function Projects() {
 
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -102,13 +98,15 @@ export default function Projects() {
                   className="ps-slide"
                   style={{ backgroundImage: `url(${p.image})` }}
                 >
+                  {/* Mobile premium layers */}
+                  <img src={p.image} alt="" className="ps-mobile-blur" />
+                  <img src={p.image} alt="" className="ps-mobile-main" />
+
                   <div className="ps-overlay" />
 
                   <div className="ps-content">
                     <span className="ps-label">IDEALAB PROJECT</span>
-
                     <h1 className="ps-title">{p.title}</h1>
-
                     <p className="ps-problem">{p.problem}</p>
 
                     <div className="ps-meta">
@@ -119,9 +117,7 @@ export default function Projects() {
                     {p.components.length > 0 && (
                       <div className="ps-components">
                         {p.components.map((c, idx) => (
-                          <span key={idx} className="ps-chip">
-                            {c}
-                          </span>
+                          <span key={idx} className="ps-chip">{c}</span>
                         ))}
                       </div>
                     )}
@@ -150,7 +146,6 @@ export default function Projects() {
           </>
         )}
       </section>
-      <Footer />
     </>
   );
 }
