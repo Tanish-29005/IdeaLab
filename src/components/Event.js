@@ -15,85 +15,217 @@ import {
 const SHEET_ID = "11r6awyQn69HkXY_jBCIqhCezwEySBra5shXcA1U283s";
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
 
+const extractFileId = (url) => {
+  if (!url || typeof url !== 'string' || !url.includes("drive.google.com")) return null;
+  
+  // Extract file ID from /file/d/{fileId}/
+  const fileMatch = url.match(/\/file\/d\/([^\/\?]+)/);
+  if (fileMatch) return fileMatch[1];
+  
+  // Extract from ?id={fileId}
+  const idMatch = url.match(/[?&]id=([^&]+)/);
+  if (idMatch) return idMatch[1];
+  
+  // Extract from open?id={fileId}
+  const openMatch = url.match(/open\?id=([^&]+)/);
+  if (openMatch) return openMatch[1];
+  
+  return null;
+};
+
 const convertDriveLink = (url) => {
-  if (!url) return "";
-
-  if (url.includes("drive.google.com")) {
-    // Extract file ID from /file/d/{fileId}/ format
-    const fileMatch = url.match(/\/file\/d\/(.*?)(?:\/|$)/);
-    if (fileMatch && fileMatch[1]) {
-      // Use thumbnail URL which works better for public images
-      return `https://drive.google.com/thumbnail?id=${fileMatch[1]}&sz=w1000`;
-    }
-
-    // Extract file ID from ?id= format
-    const idMatch = url.match(/[?&]id=([^&]+)/);
-    if (idMatch && idMatch[1]) {
-      return `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w1000`;
-    }
-
-    // Extract from open?id= format
-    const openMatch = url.match(/open\?id=([^&]+)/);
-    if (openMatch && openMatch[1]) {
-      return `https://drive.google.com/thumbnail?id=${openMatch[1]}&sz=w1000`;
-    }
+  if (!url || typeof url !== 'string') return "";
+  
+  const fileId = extractFileId(url);
+  if (fileId) {
+    // Return the primary URL format
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
   }
-
+  
   return url;
 };
 
-const EventCard = ({ event }) => (
-  <div className="event-card">
-    <div className="card-media">
-      <img 
-        src={event.image} 
-        alt={event.title}
-        onError={(e) => {
-          // Fallback if image fails to load
-          e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800";
-        }}
-      />
-      <span className="category-badge">{event.category}</span>
-    </div>
+const EventCard = ({ event }) => {
+  const [imgSrc, setImgSrc] = useState(event.image || "");
+  const [loading, setLoading] = useState(true);
+  const [attemptCount, setAttemptCount] = useState(0);
+  const attemptedUrls = useRef(new Set());
 
-    <div className="card-body">
-      <div className="date">
-        <Calendar size={14} />
-        {event.date}
+  const tryAlternativeUrl = (currentUrl) => {
+    if (!currentUrl || typeof currentUrl !== 'string') return null;
+    
+    const fileId = extractFileId(currentUrl);
+    if (!fileId) return null;
+
+    // List of alternative URL formats to try
+    const alternatives = [
+      `https://drive.google.com/uc?export=download&id=${fileId}`,
+      `https://drive.google.com/uc?export=view&id=${fileId}`,
+      `https://lh3.googleusercontent.com/d/${fileId}`,
+      `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`,
+      `https://docs.google.com/uc?export=download&id=${fileId}`,
+    ];
+
+    // Find the first alternative that hasn't been tried yet
+    for (const altUrl of alternatives) {
+      if (!attemptedUrls.current.has(altUrl)) {
+        attemptedUrls.current.add(altUrl);
+        return altUrl;
+      }
+    }
+    
+    return null;
+  };
+
+  const handleImageError = () => {
+    console.log(`Image failed (attempt ${attemptCount + 1}):`, imgSrc);
+    
+    const nextUrl = tryAlternativeUrl(imgSrc);
+    
+    if (nextUrl && attemptCount < 5) {
+      console.log(`Trying alternative URL:`, nextUrl);
+      setAttemptCount(attemptCount + 1);
+      setImgSrc(nextUrl);
+    } else {
+      console.log("All attempts failed, using fallback");
+      setLoading(false);
+      setImgSrc("https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800");
+    }
+  };
+
+  const handleImageLoad = () => {
+    console.log("Image loaded successfully:", imgSrc);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    // Reset when event changes
+    setLoading(true);
+    setAttemptCount(0);
+    const initialImg = event.image || "";
+    attemptedUrls.current = new Set([initialImg]);
+    setImgSrc(initialImg);
+  }, [event.image]);
+
+  return (
+    <div className="event-card">
+      <div className="card-media">
+        {loading && <div className="image-loader"></div>}
+        <img 
+          src={imgSrc || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"}
+          alt={event.title}
+          style={{ display: loading ? 'none' : 'block' }}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+        />
+        <span className="category-badge">{event.category}</span>
       </div>
 
-      <h3>{event.title}</h3>
-      <p>{event.description}</p>
-
-      <div className="meta">
-        <div className="meta-item">
-          <Clock size={14} />
-          <span>{event.time || "TBA"}</span>
+      <div className="card-body">
+        <div className="date">
+          <Calendar size={14} />
+          {event.date}
         </div>
 
-        <div className="meta-item">
-          <MapPin size={14} />
-          <span>{event.location || "TBA"}</span>
+        <h3>{event.title}</h3>
+        <p>{event.description}</p>
+
+        <div className="meta">
+          <div className="meta-item">
+            <Clock size={14} />
+            <span>{event.time || "TBA"}</span>
+          </div>
+
+          <div className="meta-item">
+            <MapPin size={14} />
+            <span>{event.location || "TBA"}</span>
+          </div>
         </div>
+
+        <a href={event.registrationLink} className="register-btn">
+          Register <ChevronRight size={16} />
+        </a>
       </div>
-
-      <a href={event.registrationLink} className="register-btn">
-        Register <ChevronRight size={16} />
-      </a>
     </div>
-  </div>
-);
+  );
+};
 
 const PastEventCard = ({ event }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = event.images.filter(Boolean);
+  const [imgSrc, setImgSrc] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [attemptCount, setAttemptCount] = useState(0);
+  const attemptedUrls = useRef(new Set());
+  
+  // If no carousel images, use the main event image
+  const carouselImages = event.images && event.images.length > 0 
+    ? event.images.filter(img => img && typeof img === 'string')
+    : [event.image].filter(Boolean);
+  
+  console.log("Carousel images for", event.title, ":", carouselImages);
+
+  const tryAlternativeUrl = (currentUrl) => {
+    if (!currentUrl || typeof currentUrl !== 'string') return null;
+    
+    const fileId = extractFileId(currentUrl);
+    if (!fileId) return null;
+
+    const alternatives = [
+      `https://drive.google.com/uc?export=download&id=${fileId}`,
+      `https://drive.google.com/uc?export=view&id=${fileId}`,
+      `https://lh3.googleusercontent.com/d/${fileId}`,
+      `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`,
+      `https://docs.google.com/uc?export=download&id=${fileId}`,
+    ];
+
+    for (const altUrl of alternatives) {
+      if (!attemptedUrls.current.has(altUrl)) {
+        attemptedUrls.current.add(altUrl);
+        return altUrl;
+      }
+    }
+    
+    return null;
+  };
+
+  const handleCarouselError = () => {
+    console.log(`Carousel image failed (attempt ${attemptCount + 1}):`, imgSrc);
+    
+    const nextUrl = tryAlternativeUrl(imgSrc);
+    
+    if (nextUrl && attemptCount < 5) {
+      console.log(`Trying alternative carousel URL:`, nextUrl);
+      setAttemptCount(attemptCount + 1);
+      setImgSrc(nextUrl);
+    } else {
+      console.log("All carousel attempts failed, using fallback");
+      setLoading(false);
+      setImgSrc("https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800");
+    }
+  };
+
+  const handleCarouselLoad = () => {
+    console.log("Carousel image loaded successfully:", imgSrc);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    // Reset when image index changes
+    if (carouselImages.length > 0) {
+      setLoading(true);
+      setAttemptCount(0);
+      const initialImg = carouselImages[currentImageIndex] || "";
+      attemptedUrls.current = new Set([initialImg]);
+      setImgSrc(initialImg);
+    }
+  }, [currentImageIndex, carouselImages.length]);
 
   const nextImage = () => {
-    setCurrentImageIndex(prev => (prev + 1) % images.length);
+    setCurrentImageIndex(prev => (prev + 1) % carouselImages.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex(prev => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex(prev => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
   return (
@@ -124,18 +256,19 @@ const PastEventCard = ({ event }) => {
           <p>{event.description}</p>
         </div>
 
-        {images.length > 0 && (
+        {carouselImages.length > 0 && (
           <div className="carousel-container">
+            {loading && <div className="image-loader"></div>}
             <img
-              src={images[currentImageIndex]}
+              src={imgSrc || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"}
               alt=""
               className="carousel-image"
-              onError={(e) => {
-                e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800";
-              }}
+              style={{ display: loading ? 'none' : 'block' }}
+              onLoad={handleCarouselLoad}
+              onError={handleCarouselError}
             />
 
-            {images.length > 1 && (
+            {carouselImages.length > 1 && (
               <>
                 <button className="carousel-btn prev" onClick={prevImage}>
                   <ChevronLeft size={20} />
@@ -146,7 +279,7 @@ const PastEventCard = ({ event }) => {
                 </button>
 
                 <div className="carousel-indicators">
-                  {images.map((_, idx) => (
+                  {carouselImages.map((_, idx) => (
                     <button
                       key={idx}
                       className={`indicator ${
@@ -193,26 +326,37 @@ export default function Event() {
         const json = JSON.parse(text.substring(47, text.length - 2));
         const rows = json?.table?.rows || [];
 
-        const data = rows.map((row, i) => ({
-          id: i,
-          title: row.c?.[0]?.v || "",
-          date: row.c?.[1]?.f || "",
-          time: row.c?.[2]?.v || "",
-          location: row.c?.[3]?.v || "",
-          description: row.c?.[4]?.v || "",
-          category: row.c?.[5]?.v || "Event",
-          image: convertDriveLink(
-            row.c?.[6]?.v ||
-              "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"
-          ),
-          registrationLink: row.c?.[7]?.v || "#",
-          impact: row.c?.[8]?.v || "",
-          images: row.c?.[9]?.v
-            ? row.c[9].v
-                .split(",")
-                .map(i => convertDriveLink(i.trim()))
-            : []
-        }));
+        const data = rows.map((row, i) => {
+          const imageUrl = row.c?.[6]?.v || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800";
+          const convertedImage = convertDriveLink(imageUrl);
+          
+          console.log(`Event ${i}:`);
+          console.log("  Original:", imageUrl);
+          console.log("  Converted:", convertedImage);
+          console.log("  File ID:", extractFileId(imageUrl));
+          
+          // Parse multiple images for past events (column 10)
+          const imagesString = row.c?.[9]?.v || "";
+          const parsedImages = imagesString
+            ? imagesString.split(",").map(i => convertDriveLink(i.trim())).filter(Boolean)
+            : [];
+          
+          console.log("  Past event images:", parsedImages);
+          
+          return {
+            id: i,
+            title: row.c?.[0]?.v || "",
+            date: row.c?.[1]?.f || "",
+            time: row.c?.[2]?.v || "",
+            location: row.c?.[3]?.v || "",
+            description: row.c?.[4]?.v || "",
+            category: row.c?.[5]?.v || "Event",
+            image: convertedImage,
+            registrationLink: row.c?.[7]?.v || "#",
+            impact: row.c?.[8]?.v || "",
+            images: parsedImages
+          };
+        });
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
