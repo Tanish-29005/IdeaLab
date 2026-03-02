@@ -19,14 +19,23 @@ const convertDriveLink = (url) => {
   if (!url) return "";
 
   if (url.includes("drive.google.com")) {
-    const fileMatch = url.match(/\/file\/d\/(.*?)\//);
+    // Extract file ID from /file/d/{fileId}/ format
+    const fileMatch = url.match(/\/file\/d\/(.*?)(?:\/|$)/);
     if (fileMatch && fileMatch[1]) {
-      return `https://drive.google.com/uc?export=view&id=${fileMatch[1]}`;
+      // Use thumbnail URL which works better for public images
+      return `https://drive.google.com/thumbnail?id=${fileMatch[1]}&sz=w1000`;
     }
 
+    // Extract file ID from ?id= format
     const idMatch = url.match(/[?&]id=([^&]+)/);
     if (idMatch && idMatch[1]) {
-      return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+      return `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w1000`;
+    }
+
+    // Extract from open?id= format
+    const openMatch = url.match(/open\?id=([^&]+)/);
+    if (openMatch && openMatch[1]) {
+      return `https://drive.google.com/thumbnail?id=${openMatch[1]}&sz=w1000`;
     }
   }
 
@@ -36,7 +45,14 @@ const convertDriveLink = (url) => {
 const EventCard = ({ event }) => (
   <div className="event-card">
     <div className="card-media">
-      <img src={event.image} alt={event.title} />
+      <img 
+        src={event.image} 
+        alt={event.title}
+        onError={(e) => {
+          // Fallback if image fails to load
+          e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800";
+        }}
+      />
       <span className="category-badge">{event.category}</span>
     </div>
 
@@ -114,6 +130,9 @@ const PastEventCard = ({ event }) => {
               src={images[currentImageIndex]}
               alt=""
               className="carousel-image"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800";
+              }}
             />
 
             {images.length > 1 && (
