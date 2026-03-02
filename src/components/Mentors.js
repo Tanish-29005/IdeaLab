@@ -7,7 +7,7 @@ const Marquee = MarqueeModule.default || MarqueeModule;
 export default function Mentors() {
   const sectionRef = useRef(null);
 
-  // Scroll-progress reveal for whole section
+
   useEffect(() => {
     const animate = () => {
       if (!sectionRef.current) return;

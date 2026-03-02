@@ -34,14 +34,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ---------- Events Section ---------- */
 .events-section {
   max-width: 1280px;
   margin: 0 auto;
   padding: 4rem 2rem 6rem;
 }
 
-/* ---------- Upcoming Header ---------- */
 .upcoming-header {
   text-align: center;
   position: relative;
@@ -146,7 +144,6 @@ body {
   gap: 2.5rem;
 }
 
-/* ---------- Event Card ---------- */
 .event-card {
   background: var(--card);
   border-radius: 20px;
@@ -199,7 +196,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ---------- Card Body ---------- */
 .card-body {
   padding: 1.75rem;
   display: flex;
@@ -257,7 +253,6 @@ body {
   flex-shrink: 0;
 }
 
-/* ---------- Register Button ---------- */
 .register-btn {
   display: flex;
   align-items: center;
@@ -285,7 +280,6 @@ body {
   transform: translateY(0);
 }
 
-/* ---------- Past Events Section ---------- */
 .past-section {
   background: linear-gradient(180deg, var(--dark) 0%, var(--dark-lighter) 100%);
   color: white;
@@ -327,7 +321,6 @@ body {
   gap: 2rem;
 }
 
-/* ---------- Past Event Card ---------- */
 .past-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -402,7 +395,6 @@ body {
   line-height: 1.7;
 }
 
-/* ---------- Carousel ---------- */
 .carousel-wrapper {
   position: relative;
 }
@@ -489,7 +481,6 @@ body {
   background: rgba(255, 255, 255, 0.8);
 }
 
-/* ---------- Loading & Empty States ---------- */
 .loader-container {
   display: flex;
   justify-content: center;
@@ -523,7 +514,6 @@ body {
   color: var(--muted-light);
 }
 
-/* ---------- Responsive Design ---------- */
 @media (max-width: 1024px) {
   .past-card-content {
     grid-template-columns: 1fr;

@@ -1,62 +1,42 @@
-/* =========================
-   MARQUEE WRAPPER (LIVE GRADIENT)
-   ========================= */
-/* =========================
-   MARQUEE WRAPPER – EDGE GRADIENT
-   ========================= */
 .marquee-wrapper {
   padding: 30px 0;
   overflow: hidden;
-
-  /* Edge-only gradient (center white) */
   background: linear-gradient(
     90deg,
-    #eaf1ff 0%,     /* left edge soft blue */
-    #ffffff 20%,    /* fade to white */
-    #ffffff 80%,    /* pure white center */
-    #eafff7 100%    /* right edge soft blue */
+    #eaf1ff 0%,
+    #ffffff 20%,
+    #ffffff 80%,
+    #eafff7 100%
   );
-
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
 }
 
-
-/* =========================
-   BIG MARQUEE TEXT
-   ========================= */
 .marquee-item {
-  font-size: 48px;          /* Big & readable */
+  font-size: 48px;
   font-weight: 700;
-  margin: 0 60px;           /* wide spacing */
+  margin: 0 60px;
   letter-spacing: 2px;
   text-transform: uppercase;
   white-space: nowrap;
-
 }
 
-/* =========================
-   IDEALab COLOR PALETTE
-   ========================= */
 .iot {
-  color: #2563eb;   /* blue */
+  color: #2563eb;
 }
 
 .pcb {
-  color: #22c55e;   /* green */
+  color: #22c55e;
 }
 
 .printing {
-  color: #f97316;   /* orange */
+  color: #f97316;
 }
 
 .robotics {
-  color: #7c3aed;   /* purple */
+  color: #7c3aed;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
 @media (max-width: 768px) {
   .marquee-item {
     font-size: 26px;

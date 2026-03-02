@@ -56,7 +56,6 @@ export default function Contact() {
 
         <div className="bento-grid">
 
-          {/* EMAIL */}
           <div
             className="contact-card card-email"
             onClick={() => handleCopy("idealab@sakec.ac.in", "email")}
@@ -83,7 +82,6 @@ export default function Contact() {
             </button>
           </div>
 
-          {/* PHONE */}
           <div
             className="contact-card card-phone"
             onClick={() =>
@@ -114,7 +112,6 @@ export default function Contact() {
             </button>
           </div>
 
-          {/* LOCATION */}
           <div className="contact-card card-location">
             <div className="card-icon-wrapper">
               <MapPin size={22} />
@@ -143,7 +140,6 @@ export default function Contact() {
             </a>
           </div>
 
-          {/* SOCIAL */}
           <div className="contact-card card-social">
             <div className="card-label" style={{ marginBottom: "1.5rem" }}>
               Social & Links
@@ -183,8 +179,6 @@ export default function Contact() {
                 </div>
                 <ArrowUpRight size={18} />
               </a>
-
-          
 
             </div>
           </div>

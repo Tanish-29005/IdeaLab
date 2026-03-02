@@ -12,7 +12,7 @@ export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Fetch Data
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,7 +57,7 @@ export default function Projects() {
     fetchData();
   }, []);
 
-  // 🔹 Scroll Tracking
+
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;

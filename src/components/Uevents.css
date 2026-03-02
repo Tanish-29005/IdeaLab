@@ -1,32 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 .scroll-left,
 .scroll-right,
 .scroll-fade {
   opacity: 0;
   will-change: transform, opacity;
 }
+
 .parallax-image {
   will-change: transform;
 }
 
-/* Main Section */
-/* Main Section - Updated Background */
-/* Main Section - Blue Left, Cream Right */
 .hack-section {
   font-family: 'Inter', sans-serif;
   padding: 80px 20px 100px;
-  
   background: linear-gradient(
     95deg,
-    #e3efff 0%,     /* Cool Blue Left */
-    #f8fafc 50%,    /* Neutral Middle */
-    #fcecdb 100%    /* Warm Cream/Peach Right */
+    #e3efff 0%,
+    #f8fafc 50%,
+    #fcecdb 100%
   );
-  
   position: relative;
   overflow: hidden;
 }
-/* "Don't Miss Out" Header */
+
 .section-header {
   display: flex;
   align-items: center;
@@ -50,7 +47,6 @@
   background-color: #cbd5e1;
 }
 
-/* Container */
 .hack-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -59,19 +55,17 @@
   gap: 60px;
 }
 
-/* --- Left Column --- */
 .hack-left {
   flex: 1;
   max-width: 500px;
 }
 
-/* Live Pill */
 .live-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #ffedd5; /* Light Orange */
-  color: #f97316; /* Dark Orange */
+  background-color: #ffedd5;
+  color: #f97316;
   font-size: 11px;
   font-weight: 700;
   padding: 6px 12px;
@@ -88,23 +82,21 @@
   box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
 }
 
-/* Typography */
 .hack-title {
   font-size: 48px;
   font-weight: 800;
-  color: #0f172a; /* Slate 900 */
+  color: #0f172a;
   line-height: 1.1;
   margin: 0 0 10px 0;
 }
 
 .hack-subtitle {
   font-size: 18px;
-  color: #3b82f6; /* Blue 500 */
+  color: #3b82f6;
   font-weight: 500;
   margin: 0 0 30px 0;
 }
 
-/* Date & Venue List */
 .hack-details {
   display: flex;
   flex-direction: column;
@@ -121,7 +113,7 @@
 .icon-box {
   width: 40px;
   height: 40px;
-  background-color: #eff6ff; /* Light Blue */
+  background-color: #eff6ff;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -150,17 +142,15 @@
   margin: 0;
 }
 
-/* Description */
 .hack-desc {
   font-size: 16px;
   line-height: 1.6;
-  color: #64748b; /* Slate 500 */
+  color: #64748b;
   margin-bottom: 35px;
   border-left: 3px solid #e2e8f0;
   padding-left: 15px;
 }
 
-/* Button */
 .hack-btn {
   background-color: #0f172a;
   color: #ffffff;
@@ -189,7 +179,6 @@
   transform: translateX(4px);
 }
 
-/* --- Right Column (Image) --- */
 .hack-right {
   flex: 1;
   display: flex;
@@ -214,7 +203,6 @@
   transition: transform 0.5s ease;
 }
 
-/* Glassy Badge */
 .spots-badge {
   position: absolute;
   top: 20px;
@@ -242,11 +230,10 @@
   display: block;
   font-size: 18px;
   font-weight: 800;
-  color: #ea580c; /* Burnt Orange */
+  color: #ea580c;
   line-height: 1;
 }
 
-/* Dots */
 .slider-dots {
   position: absolute;
   bottom: 20px;
@@ -269,8 +256,6 @@
   transform: scale(1.2);
 }
 
-
-/* Responsive */
 @media (max-width: 968px) {
   .hack-container {
     flex-direction: column;
@@ -281,11 +266,12 @@
   .hack-left {
     max-width: 100%;
   }
-  
-  .hack-details, .detail-item {
+
+  .hack-details,
+  .detail-item {
     align-items: center;
   }
-  
+
   .hack-desc {
     border-left: none;
     padding-left: 0;
@@ -294,30 +280,29 @@
   .hack-btn {
     margin: 0 auto;
   }
-  
+
   .image-card {
     height: 300px;
   }
 }
+
 @media (max-width: 1024px) {
   .hack-container {
     gap: 40px;
   }
-  
+
   .hack-title {
     font-size: 42px;
   }
-  
+
   .hack-right .image-card {
     height: 350px;
   }
 }
 
-/* MOBILE & TABLET PORTRAIT (Max Width: 900px) */
 @media (max-width: 900px) {
   .hack-section {
     padding: 60px 20px;
-    /* Rotate gradient: Blue top, Cream bottom */
     background: linear-gradient(
       180deg,
       #e3efff 0%,
@@ -326,7 +311,6 @@
     );
   }
 
-  /* Optional: Move blob to center for mobile */
   .hack-section::before {
     top: 50%;
     left: 50%;
@@ -340,7 +324,6 @@
     gap: 50px;
   }
 
-  /* Center the content */
   .hack-left {
     max-width: 100%;
     display: flex;
@@ -354,17 +337,16 @@
     max-width: 600px;
   }
 
-  /* Center the grid items */
   .hack-details {
     display: flex;
-    flex-direction: row; /* Side by side details on tablet */
+    flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
   }
 
   .detail-item {
-    background: transparent; /* Remove background on mobile for cleaner look */
+    background: transparent;
     width: auto;
   }
 
@@ -373,15 +355,14 @@
   }
 
   .image-card {
-    max-width: 100%; /* Full width */
+    max-width: 100%;
     height: 380px;
   }
 }
 
-/* SMALL MOBILE (Max Width: 500px) */
 @media (max-width: 500px) {
   .hack-title {
-    font-size: 32px; /* Smaller Title */
+    font-size: 32px;
   }
 
   .hack-subtitle {
@@ -390,20 +371,20 @@
   }
 
   .hack-details {
-    flex-direction: column; /* Stack details vertically */
+    flex-direction: column;
     gap: 20px;
     width: 100%;
   }
 
   .detail-item {
-    background: rgba(255,255,255,0.6); /* Add bg back for readability */
+    background: rgba(255,255,255,0.6);
     width: 100%;
-    justify-content: flex-start; /* Align left inside the box */
+    justify-content: flex-start;
     padding: 15px;
   }
 
   .image-card {
-    height: 280px; /* Shorter image */
+    height: 280px;
     border-radius: 20px;
   }
 
@@ -416,9 +397,9 @@
   .spots-number {
     font-size: 16px;
   }
-  
+
   .hack-btn {
-    width: 100%; /* Full width button */
+    width: 100%;
     justify-content: center;
   }
 }

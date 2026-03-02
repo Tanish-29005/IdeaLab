@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
 
-        {/* LEFT : ABOUT */}
+       
         <div className="footer-col">
           <h3 className="footer-title">IDEALab SAKEC</h3>
           <p className="footer-text">
@@ -16,7 +16,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* CENTER : QUICK LINKS */}
         <div className="footer-col">
           <h4 className="footer-heading">Quick Links</h4>
           <ul className="footer-links">
@@ -32,7 +31,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* RIGHT : CONTACT */}
         <div className="footer-col">
           <h4 className="footer-heading">Contact Us</h4>
           <p className="footer-text">
@@ -47,7 +45,7 @@ export default function Footer() {
 
       </div>
 
-      {/* BOTTOM BAR */}
+      
       <div className="footer-bottom">
         <p>
           © {new Date().getFullYear()} IDEALab SAKEC. 

@@ -1,6 +1,4 @@
-/* =========================
-   INITIAL STATE
-   ========================= */
+
 .scroll-header,
 .scroll-left,
 .scroll-right {
@@ -8,9 +6,6 @@
   will-change: transform, opacity;
 }
 
-/* =========================
-   HEADER
-   ========================= */
 .vission-header {
   text-align: center;
   margin-top: 80px;
@@ -38,9 +33,7 @@
   margin: 0 auto;
 }
 
-/* =========================
-   SECTION LAYOUT
-   ========================= */
+
 .vision-section {
   display: flex;
   justify-content: center;
@@ -50,16 +43,14 @@
   flex-wrap: wrap;
 }
 
-/* =========================
-   CARD BASE
-   ========================= */
+
 .vision-card {
   width: 600px;
   padding: 37px;
   border-radius: 18px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   background: #ffffff;
-  transition: none; /* important */
+  transition: none; 
 }
 
 .vision-card h5 {
@@ -74,14 +65,14 @@
   color: #374151;
 }
 
-/* ICONS */
+
 .vission-icon,
 .mission-icon {
   width: 52px;
   height: 52px;
 }
 
-/* BACKGROUNDS */
+
 .vision-bg {
   background-color: #f3f6ff;
 }
@@ -90,7 +81,7 @@
   background-color: #fff6ec;
 }
 
-/* HIGHLIGHTS */
+
 .vission-highlight {
   color: #2563eb;
   font-weight: 600;
@@ -101,9 +92,7 @@
   font-weight: 600;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+
 @media (max-width: 1024px) {
   .vission-text {
     font-size: 34px;

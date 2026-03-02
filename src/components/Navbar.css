@@ -1,59 +1,50 @@
-/* 1. Main Wrapper: Invisible Layout Container */
 .navbar-wrapper {
-  /* Layout & Positioning */
   position: sticky;
-  top: 20px; /* Adds a gap from the top of the browser for a floating look */
+  top: 20px;
   z-index: 1000;
   width: 100%;
-  
-  /* Make the wrapper transparent so only the pill is visible */
-  background: transparent; 
+  background: transparent;
   box-shadow: none;
   border: none;
-  padding: 0; /* Remove padding to let the pill float naturally */
-
+  padding: 0;
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
 }
 
-/* 2. Inner Container: THE GLASS PILL */
 .navbar-inner {
   width: 95%;
   max-width: 1350px;
-
-  /* GLASS EFFECT MOVED HERE */
-  background: rgba(255, 255, 255, 0.75); /* Semi-transparent white */
-  backdrop-filter: blur(16px);            /* heavy blur */
-  -webkit-backdrop-filter: blur(16px);    /* Safari support */
-  
-  /* Shape & Borders */
-  border-radius: 50px; /* The Curve */
-  border: 1px solid rgba(255, 255, 255, 0.6); /* Glassy Edge */
-  
-  /* Shadow to make it pop off the page */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-
   padding: 10px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* --- Rest of the Content Styles (Unchanged) --- */
-
-/* Left Section */
 .nav-left {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.nav-logo { height: 55px; width: auto; }
-.nav-logo-idea { height: 45px; width: auto; }
+.nav-logo {
+  height: 55px;
+  width: auto;
+}
+
+.nav-logo-idea {
+  height: 45px;
+  width: auto;
+}
 
 .nav-logo + .nav-logo-idea {
-  border-left: 1px solid #94a3b8; 
+  border-left: 1px solid #94a3b8;
   padding-left: 15px;
 }
 
@@ -81,7 +72,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Right Section */
 .nav-right {
   display: flex;
   align-items: center;
@@ -92,7 +82,7 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
-  color: #334155; 
+  color: #334155;
   position: relative;
   transition: color 0.2s ease;
 }
@@ -101,7 +91,6 @@
   color: #2563eb;
 }
 
-/* Active State */
 .nav-right a.active:not(.contact-btn) {
   color: #1e3a8a;
   font-weight: 600;
@@ -118,7 +107,6 @@
   border-radius: 2px;
 }
 
-/* Contact Button */
 .contact-btn {
   background: #2563eb;
   color: #ffffff !important;
@@ -135,8 +123,12 @@
   transform: translateY(-1px);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
-  .nav-text p { display: none; }
-  .nav-right { display: none; }
+  .nav-text p {
+    display: none;
+  }
+
+  .nav-right {
+    display: none;
+  }
 }

@@ -5,93 +5,85 @@ import Lenis from "@studio-freight/lenis";
 import Footer from "./Footer.js";
 
 const equipments = [
-    {
+{
   title: "Benq Smart Board",
   description:
     "Interactive smart classroom display with multi-touch support and wireless screen sharing.",
   specs: "Power: 220–300W | Education Display",
   img: "./Benq Smart Board.png",
-  glow: "#3b82f6", // Blue - digital/smart tech
+  glow: "#3b82f6",
   scale: 1.5,
 },
-
 {
   title: "100W Acrylic Laser Cutter",
   description:
     "Precision laser cutting and engraving machine for acrylic, wood, leather, and more.",
   specs: "Working Area: 600×900 mm | 100W CO₂ Laser",
   img: "./Laser (2).png",
-  glow: "#ef4444", // Red - laser heat energy
+  glow: "#ef4444",
   scale: 1.5,
 },
-
 {
   title: "Creality CR-M4 3D Printer",
   description:
     "Large-format FDM 3D printer with 450×450×470mm build volume for industrial prototypes.",
   specs: "Print Volume: 450×450×470 mm | FDM",
   img: "./CRMnobg.png",
-  glow: "#f59e0b", // Amber - heavy industrial machine
+  glow: "#f59e0b",
   scale: 1.5,
 },
-
 {
   title: "Creality Ender 5 S1",
   description:
     "High-speed FDM 3D printer with auto bed leveling and stable motion system.",
   specs: "Speed: 250 mm/s | Auto Leveling",
   img: "./Ender (2).png",
-  glow: "#10b981", // Green - rapid prototyping
+  glow: "#10b981",
   scale: 1.5,
 },
-
 {
   title: "Adventurer 5M Pro (Flashforge)",
   description:
     "Fully enclosed high-speed 3D printer with Wi-Fi and remote monitoring.",
   specs: "Speed: 600 mm/s | Enclosed FDM",
   img: "./flash forge.png",
-  glow: "#6366f1", // Indigo - advanced smart printer
+  glow: "#6366f1",
   scale: 1.5,
 },
-
 {
   title: "Desktop CNC SRM-20",
   description:
     "Compact precision milling machine for PCB fabrication and small part machining.",
   specs: "PCB | Acrylic | Nylon | Milling",
   img: "./Srm20 (2).png",
-  glow: "#ec4899", // Pink - precision engineering
+  glow: "#ec4899",
   scale: 1.5,
 },
-
 {
   title: "Ferm Bench Sander",
   description:
     "350W bench sander for shaping, smoothing, and finishing wood and metal surfaces.",
   specs: "350W | Belt & Disc Sanding",
   img: "./bench sander.png",
-  glow: "#f97316", // Orange - mechanical finishing
+  glow: "#f97316",
   scale: 1.5,
 },
-
 {
   title: "Ferm Scroll Saw",
   description:
     "Precision scroll saw for intricate curved cuts and detailed woodworking projects.",
   specs: "120W | 45° Adjustable Table",
   img: "./Ferm scroll saw.png",
-  glow: "#14b8a6", // Teal - fine cutting tool
+  glow: "#14b8a6",
   scale: 1.5,
 },
-
 {
   title: "200mm Bandsaw",
   description:
     "Heavy-duty bandsaw for straight and curved cutting in wood, plastic, and metal.",
   specs: "1000W | 2-Speed | 200mm Cut Height",
   img: "./Bandsaw.png",
-  glow: "#eab308", // Yellow - industrial power tool
+  glow: "#eab308",
   scale: 1.5,
 }
 ];
@@ -164,8 +156,6 @@ export default function Facilities() {
         />
 
         <div className="facility-text">
-         
-
           <div key={activeIndex} className="text-stack">
             <h1>{equipments[activeIndex]?.title}</h1>
             <p>{equipments[activeIndex]?.description}</p>

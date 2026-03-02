@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap");
 
-/* ---------- ROOT ---------- */
 .ps-hero {
   width: 100vw;
   height: 100vh;
@@ -10,7 +9,6 @@
   font-family: Inter, sans-serif;
 }
 
-/* ---------- SLIDES ---------- */
 .ps-slides {
   display: flex;
   height: 100%;
@@ -32,7 +30,6 @@
   scroll-snap-align: start;
 }
 
-/* ---------- OVERLAY ---------- */
 .ps-overlay {
   position: absolute;
   inset: 0;
@@ -44,7 +41,6 @@
   );
 }
 
-/* ---------- CONTENT ---------- */
 .ps-content {
   position: absolute;
   top: 50%;
@@ -78,7 +74,6 @@
   margin-bottom: 1.2rem;
 }
 
-/* ---------- META ---------- */
 .ps-meta {
   display: flex;
   gap: 2.5rem;
@@ -88,7 +83,6 @@
   margin-bottom: 0.8rem;
 }
 
-/* ---------- COMPONENT TAGS ---------- */
 .ps-components {
   display: flex;
   flex-wrap: wrap;
@@ -106,14 +100,12 @@
   border: 1px solid rgba(34, 211, 238, 0.35);
 }
 
-/* ---------- OUTCOME ---------- */
 .ps-outcome {
   font-size: 0.95rem;
   font-weight: 500;
   color: #dbeafe;
 }
 
-/* ---------- THUMBNAILS ---------- */
 .ps-thumbs {
   position: absolute;
   right: 3rem;
@@ -149,7 +141,6 @@
   opacity: 0.6;
 }
 
-/* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
   .ps-content {
     left: 2rem;

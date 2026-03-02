@@ -1,15 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 :root {
-  --primary: #0f172a;       /* Deep Slate */
+  --primary: #0f172a;      
   --primary-light: #334155;
-  --accent: #4f46e5;        /* Elegant Indigo */
-  --bg-body: #f8fafc;       /* Very light cool gray */
+  --accent: #4f46e5;        
+  --bg-body: #f8fafc;       
   --bg-card: #ffffff;
   --text-main: #1e293b;
   --text-muted: #64748b;
   --border-light: #e2e8f0;
-  
-  /* AICTE IdeaLab Brand Colors */
+
   --brand-blue: #0ea5e9;
   --brand-red: #ef4444;
   --brand-yellow: #f5a623;
@@ -43,7 +42,7 @@ body {
   padding: 6rem 1.5rem 8rem;
 }
 
-/* --- Header Section --- */
+
 .header-section {
   text-align: center;
   margin-bottom: 5rem;
@@ -88,14 +87,12 @@ body {
   line-height: 1.8;
 }
 
-/* --- Bento Grid --- */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.5rem;
 }
 
-/* --- Elegant Card Base --- */
 .contact-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
@@ -166,7 +163,7 @@ body {
   gap: 0.75rem;
 }
 
-/* --- Specific Cards & Brand Accents --- */
+
 .card-email {
   grid-column: span 8;
 }
@@ -196,7 +193,7 @@ body {
 }
 .card-social:hover { border-color: rgba(245, 166, 35, 0.3); }
 
-/* --- Social Card Specifics --- */
+
 .social-list {
   display: flex;
   flex-direction: column;
@@ -240,7 +237,7 @@ body {
   color: var(--brand-yellow) !important;
 }
 
-/* --- Location Card Specifics --- */
+
 .location-details {
   font-size: 1.1rem;
   color: var(--text-muted);
@@ -255,7 +252,7 @@ body {
   margin-bottom: 0.25rem;
 }
 
-/* --- Decorative Subtle Background Pattern for Location Card --- */
+
 .card-location::before {
   content: '';
   position: absolute;
@@ -277,7 +274,7 @@ body {
   z-index: 1;
 }
 
-/* --- Responsive Design --- */
+
 @media (max-width: 1024px) {
   .card-email { grid-column: span 12; }
   .card-phone { grid-column: span 12; }

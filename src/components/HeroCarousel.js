@@ -25,7 +25,7 @@ export default function HeroCarousel() {
         data-bs-interval="5000"
         data-bs-pause="false"
       >
-        {/* Indicators */}
+       
         <div className="carousel-indicators">
           {slides.map((_, index) => (
             <button
@@ -38,7 +38,7 @@ export default function HeroCarousel() {
           ))}
         </div>
 
-        {/* Slides */}
+        
         <div className="carousel-inner">
           {slides.map((slide, index) => (
             <div
@@ -59,7 +59,7 @@ export default function HeroCarousel() {
           ))}
         </div>
 
-        {/* Controls */}
+      
         <button
           className="carousel-control-prev"
           type="button"

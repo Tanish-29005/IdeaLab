@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <header className="navbar-wrapper">
       <div className="navbar-inner">
-        {/* Left Side: Logos + Title */}
+     
         <div className="nav-left">
           <img src="/sakec logo.png" alt="SAKEC" className="nav-logo" />
           <img src="/IDEA lab logo.png" alt="IDEALab" className="nav-logo-idea" />
@@ -16,7 +16,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Right Side: Navigation */}
+       
         <nav className="nav-right">
           <NavLink to="/" end>Home</NavLink>
         

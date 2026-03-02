@@ -11,18 +11,15 @@ export default function MarqueeComponent() {
         gradient={false}
         pauseOnHover={true}
       >
-        {/* Repeat domains to fill space */}
         <span className="marquee-item iot">IoT</span>
         <span className="marquee-item pcb">PCB Design</span>
         <span className="marquee-item printing">3D Printing</span>
         <span className="marquee-item robotics">Robotics</span>
-        
 
         <span className="marquee-item iot">IoT</span>
         <span className="marquee-item pcb">PCB Design</span>
         <span className="marquee-item printing">3D Printing</span>
         <span className="marquee-item robotics">Robotics</span>
-        
       </Marquee>
     </div>
   );

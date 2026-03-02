@@ -1,9 +1,7 @@
-/* =========================
-   GLOBAL
-   ========================= */
 * {
   box-sizing: border-box;
 }
+
 .hero-parallax {
   will-change: transform;
 }
@@ -13,16 +11,8 @@ body {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   background: #f5f7fb;
   color: #111827;
-  
- /* Sab ek dusre ke upar chad gaye */
-  
-   /* Pehle sab chupaye hue hain */
-
 }
 
-/* =========================
-   HERO WRAPPER
-   ========================= */
 .hero-wrapper {
   margin: 16px;
 }
@@ -32,9 +22,6 @@ body {
   overflow: hidden;
 }
 
-/* =========================
-   SLIDE BACKGROUND
-   ========================= */
 .carousel-bg {
   height: 78vh;
   background-size: cover;
@@ -42,7 +29,6 @@ body {
   position: relative;
 }
 
-/* Dark overlay */
 .carousel-bg::after {
   content: "";
   position: absolute;
@@ -51,19 +37,14 @@ body {
   pointer-events: none;
 }
 
-/* =========================
-   CAPTION
-   ========================= */
 .carousel-caption-custom {
   position: absolute;
   inset: 0;
   z-index: 4;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   text-align: center;
   padding: 20px;
   color: #ffffff;
@@ -82,7 +63,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* CTA */
 .hero-btn {
   background: #ffffff;
   color: #2563eb;
@@ -99,9 +79,6 @@ body {
   background: #f3f4f6;
 }
 
-/* =========================
-   CONTROLS & INDICATORS
-   ========================= */
 .carousel-control-prev,
 .carousel-control-next {
   width: 60px;
@@ -112,28 +89,23 @@ body {
 .carousel-control-next-icon {
   filter: brightness(0) invert(1);
 }
-.carousel-indicators{
+
+.carousel-indicators {
   margin-left: 0%;
 }
+
 .carousel-indicators button {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-
   background-color: rgba(255, 255, 255, 0.6);
 }
 
 .carousel-indicators .active {
   background-color: #ffffff;
   display: flex;
-  
 }
 
-/* =========================
-   ANIMATIONS
-   ========================= */
-
-/* Keyframes */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -166,14 +138,12 @@ body {
   to { transform: scale(1.08); }
 }
 
-/* Reset animation state */
 .carousel-caption-custom h2,
 .carousel-caption-custom p,
 .carousel-caption-custom .hero-btn {
   opacity: 0;
 }
 
-/* Trigger animations on active slide */
 .carousel-item.active .carousel-bg {
   animation: zoomBg 6s ease forwards;
 }
@@ -192,9 +162,6 @@ body {
   animation-delay: 0.6s;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
 @media (max-width: 1024px) {
   .carousel-caption-custom h2 {
     font-size: 40px;

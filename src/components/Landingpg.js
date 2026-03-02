@@ -12,22 +12,13 @@ import Uevents from "./Uevents.js";
 export default function Landingpg() {
   return (
     <>
-      {/*Navbar*/}
       <Navbar />
-
-      {/* HERO */}
       <HeroCarousel />
-      {/*Marquee*/}
       <MarqueeComponent />
-      {/*vission & mission*/}
       <Vission />
-      {/*Upcomming Events*/}
       <Uevents />
-      {/*Mentors*/}
       <Mentors />
-      {/*Footer*/}
       <Footer />
-      
     </>
   );
 }

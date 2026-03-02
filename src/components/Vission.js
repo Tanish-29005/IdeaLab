@@ -21,7 +21,6 @@ export default function Vission() {
 
         const rect = el.getBoundingClientRect();
 
-        // progress: 0 → 1
         const progress = Math.min(
           Math.max((viewportHeight - rect.top) / (viewportHeight * 0.75), 0),
           1
@@ -49,16 +48,13 @@ export default function Vission() {
 
   return (
     <>
-      {/* HEADER */}
       <div ref={headerRef} className="vission-header scroll-header">
         <h6 className="philosophy">OUR PHILOSOPHY</h6>
         <h2 className="vission-text">Vision & Mission</h2>
         <div className="line"></div>
       </div>
 
-      {/* CARDS */}
       <div className="vision-section">
-        {/* Vision Card */}
         <div
           ref={leftCardRef}
           className="vision-card vision-bg scroll-left"
@@ -74,7 +70,6 @@ export default function Vission() {
           </p>
         </div>
 
-        {/* Mission Card */}
         <div
           ref={rightCardRef}
           className="vision-card mission-bg scroll-right"
