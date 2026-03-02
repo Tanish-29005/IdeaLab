@@ -3,8 +3,6 @@ import React from "react";
 import "./App.css"; 
 import { Routes, Route, Link } from "react-router-dom";
 import Landingpg from "./components/Landingpg.js";
-import Signup from "./components/Signup.js";
-import Login from "./components/Login.js"
 import Event from "./components/Event.js";
 import Team from "./components/Team.js";
 import Facilities from "./components/Facilities.js";
