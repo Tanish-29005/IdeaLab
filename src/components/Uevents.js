@@ -4,9 +4,40 @@ import "./Uevents.css";
 const SHEET_ID = "11r6awyQn69HkXY_jBCIqhCezwEySBra5shXcA1U283s";
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
 
+// 🔥 GOOGLE DRIVE LINK CONVERTER
+const extractFileId = (url) => {
+  if (!url || typeof url !== 'string' || !url.includes("drive.google.com")) return null;
+  
+  const fileMatch = url.match(/\/file\/d\/([^\/\?]+)/);
+  if (fileMatch) return fileMatch[1];
+  
+  const idMatch = url.match(/[?&]id=([^&]+)/);
+  if (idMatch) return idMatch[1];
+  
+  const openMatch = url.match(/open\?id=([^&]+)/);
+  if (openMatch) return openMatch[1];
+  
+  return null;
+};
+
+const convertDriveLink = (url) => {
+  if (!url || typeof url !== 'string') return "";
+  
+  const fileId = extractFileId(url);
+  if (fileId) {
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
+  }
+  
+  return url;
+};
+
 export default function Uevents() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [imgSrc, setImgSrc] = useState("");
+  const [imgLoading, setImgLoading] = useState(true);
+  const [attemptCount, setAttemptCount] = useState(0);
+  const attemptedUrls = useRef(new Set());
 
   const sectionRef = useRef(null);
   const leftRef = useRef(null);
@@ -33,6 +64,51 @@ export default function Uevents() {
     return new Date(value);
   };
 
+  const tryAlternativeUrl = (currentUrl) => {
+    if (!currentUrl || typeof currentUrl !== 'string') return null;
+    
+    const fileId = extractFileId(currentUrl);
+    if (!fileId) return null;
+
+    const alternatives = [
+      `https://drive.google.com/uc?export=download&id=${fileId}`,
+      `https://drive.google.com/uc?export=view&id=${fileId}`,
+      `https://lh3.googleusercontent.com/d/${fileId}`,
+      `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`,
+      `https://docs.google.com/uc?export=download&id=${fileId}`,
+    ];
+
+    for (const altUrl of alternatives) {
+      if (!attemptedUrls.current.has(altUrl)) {
+        attemptedUrls.current.add(altUrl);
+        return altUrl;
+      }
+    }
+    
+    return null;
+  };
+
+  const handleImageError = () => {
+    console.log(`Uevents image failed (attempt ${attemptCount + 1}):`, imgSrc);
+    
+    const nextUrl = tryAlternativeUrl(imgSrc);
+    
+    if (nextUrl && attemptCount < 5) {
+      console.log(`Trying alternative URL:`, nextUrl);
+      setAttemptCount(attemptCount + 1);
+      setImgSrc(nextUrl);
+    } else {
+      console.log("All attempts failed, using fallback");
+      setImgLoading(false);
+      setImgSrc("https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800");
+    }
+  };
+
+  const handleImageLoad = () => {
+    console.log("Uevents image loaded successfully:", imgSrc);
+    setImgLoading(false);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,16 +117,21 @@ export default function Uevents() {
         const json = JSON.parse(text.substring(47, text.length - 2));
         const rows = json?.table?.rows || [];
 
-        const data = rows.map((row, i) => ({
-          id: i,
-          title: row.c?.[0]?.v || "",
-          dateRaw: row.c?.[1]?.v || null,
-          time: row.c?.[2]?.v || "",
-          location: row.c?.[3]?.v || "",
-          description: row.c?.[4]?.v || "",
-          image: row.c?.[6]?.v || "",
-          registrationLink: row.c?.[7]?.v || "#"
-        }))
+        const data = rows.map((row, i) => {
+          const imageUrl = row.c?.[6]?.v || "";
+          const convertedImage = convertDriveLink(imageUrl);
+          
+          return {
+            id: i,
+            title: row.c?.[0]?.v || "",
+            dateRaw: row.c?.[1]?.v || null,
+            time: row.c?.[2]?.v || "",
+            location: row.c?.[3]?.v || "",
+            description: row.c?.[4]?.v || "",
+            image: convertedImage,
+            registrationLink: row.c?.[7]?.v || "#"
+          };
+        })
         .filter(e => e.dateRaw); // must have date
 
         const today = new Date();
@@ -78,6 +159,15 @@ export default function Uevents() {
 
         setEvent(selectedEvent || null);
         setLoading(false);
+
+        // Initialize image loading
+        if (selectedEvent?.image) {
+          console.log("Uevents - Loading image:", selectedEvent.image);
+          setImgLoading(true);
+          setAttemptCount(0);
+          attemptedUrls.current = new Set([selectedEvent.image]);
+          setImgSrc(selectedEvent.image);
+        }
 
       } catch (err) {
         console.error("Landing event fetch error:", err);
@@ -195,10 +285,25 @@ export default function Uevents() {
 
         <div ref={rightRef} className="hack-right scroll-right">
           <div className="image-card">
+            {imgLoading && (
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                backgroundSize: '200% 100%',
+                animation: 'shimmer 1.5s infinite'
+              }} />
+            )}
             <img
-              src={event.image}
+              src={imgSrc || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"}
               alt={event.title}
               className="slider-image"
+              style={{ display: imgLoading ? 'none' : 'block' }}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
             />
           </div>
         </div>
