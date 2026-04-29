@@ -50,6 +50,4 @@ This lets non-developers on the lab team update events and members without touch
 - **Clean UI** — designed to represent the college lab cell professionally
 - **Scalable** — easy to add new sections (gallery, achievements, projects)
 
----
 
-n](https://linkedin.com/in/tanish-nagarkar-768384251) | [Email](mailto:tanishnagarkar@gmail.com)
